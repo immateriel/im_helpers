@@ -196,4 +196,16 @@ module ImHelpers
     end
 
   end
+
+  module TranslationHelpers
+    def t(args={})
+      trkey=self.downcase.translit.gsub(/\./, "")
+      I18n.t trkey, args
+    end
+
+    def routes_t
+      I18n.t self, :scope => "routes", :default => self
+    end
+  end
+
 end
