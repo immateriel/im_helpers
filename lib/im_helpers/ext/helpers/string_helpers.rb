@@ -92,6 +92,17 @@ module ImHelpers
       end
     end
 
+    # translit if russian, arab ou greek
+    def translit_non_latin_lang(lang)
+      case lang
+        when "ar","ru","el"
+          self.translit
+        else
+          self
+      end
+    end
+
+
     def maybe_latin1_to_s
       if self.encoding.to_s == "ASCII-8BIT"
         self.force_encoding "UTF-8"
@@ -186,9 +197,35 @@ module ImHelpers
       doc.to_xml(:encoding => "UTF-8")
     end
 
+    def strip_html_links
+      doc= Nokogiri::XML::DocumentFragment.parse(self.to_s)
+      doc.search(".//a").each do |e|
+        e.swap "#{e.inner_html}"
+      end
+
+      doc.to_xml(:encoding => "UTF-8")
+    end
+
+    def delete_lonely_html_links
+      doc= Nokogiri::XML.parse("<body>"+self.to_s+"</body>")
+      doc.xpath("//p[a and not(*[not(self::a)] or text()[normalize-space()])]").each do |e|
+        e.remove
+      end
+      doc.at("body").children.to_xml(:encoding => "UTF-8")
+    end
+
+    def valid_xhtml
+      Hpricot(self, :xhtml_strict => true).to_s
+#    Nokogiri::XML::DocumentFragment.parse(self).to_s
+    end
+
     # cut html to len
     def clean_truncate_html(len=30, ellipsis="...")
       Nokogiri::HTML::DocumentFragment.parse(HTML_Truncator.truncate(self, len, :ellipsis => ellipsis, :length_in_chars => true)).to_xhtml
+    end
+
+    def truncate_html(len = 30)
+      self.clean_truncate_html(len)
     end
 
     def strip_entities
