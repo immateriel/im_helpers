@@ -3,7 +3,7 @@ end
 require 'active_support'
 require 'active_support/core_ext/object'
 require 'iso-639'
-require 'YAML'
+require 'yaml'
 
 require 'countries'
 
