@@ -17,13 +17,17 @@ Gem::Specification.new do |s|
     "README"
   ]
   s.files = [
-    "lib/date_helpers.rb",
-    "lib/i18n_helpers.rb",
-    "lib/ip_to_country.rb",
-    "lib/language.rb",
-    "lib/number_helpers.rb",
-    "lib/string_helpers.rb",
-    "lib/territories.rb"
+    "lib/im_helpers.rb",
+    "lib/im_helpers/ext/date.rb",
+    "lib/im_helpers/ext/helpers/date_helpers.rb",
+    "lib/im_helpers/ext/helpers/number_helpers.rb",
+    "lib/im_helpers/ext/helpers/string_helpers.rb",
+    "lib/im_helpers/ext/i18n.rb",
+    "lib/im_helpers/ext/number.rb",
+    "lib/im_helpers/ext/string.rb",
+    "lib/im_helpers/ip_to_country.rb",
+    "lib/im_helpers/language.rb",
+    "lib/im_helpers/territories.rb"
   ]
   s.homepage = "http://github.com/immateriel/im_helpers"
   s.require_paths = ["lib"]
@@ -41,6 +45,7 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<countries>, [">= 0"])
       s.add_runtime_dependency(%q<currencies>, [">= 0"])
       s.add_runtime_dependency(%q<activesupport>, [">= 0"])
+      s.add_runtime_dependency(%q<i18n>, [">= 0"])
     else
       s.add_dependency(%q<nokogiri>, [">= 0"])
       s.add_dependency(%q<htmlentities>, [">= 0"])
@@ -49,6 +54,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<countries>, [">= 0"])
       s.add_dependency(%q<currencies>, [">= 0"])
       s.add_dependency(%q<activesupport>, [">= 0"])
+      s.add_dependency(%q<i18n>, [">= 0"])
     end
   else
     s.add_dependency(%q<nokogiri>, [">= 0"])
@@ -58,6 +64,7 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<countries>, [">= 0"])
     s.add_dependency(%q<currencies>, [">= 0"])
     s.add_dependency(%q<activesupport>, [">= 0"])
+    s.add_dependency(%q<i18n>, [">= 0"])
   end
 end
 
