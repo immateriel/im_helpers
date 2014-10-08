@@ -1,0 +1,994 @@
+:tax_rates:
+  AU:
+    :default: 
+      :tax_rate: 10.0
+    :book: 
+      :tax_rate: 10.0
+      :tax_treatment: :default
+      :tax_scope: :na
+    :ebook: 
+      :tax_rate: 10.0
+      :tax_treatment: :default
+      :tax_scope: :na
+  CN: 
+    :default: 
+      :tax_rate: 13.0
+    :book: 
+      :tax_rate: 0.0
+      :tax_treatment: :exempt
+      :tax_scope: :limited
+    :ebook: 
+      :tax_rate: 13.0
+      :tax_treatment: :special
+      :tax_scope: :limited
+  FJ: 
+    :default: 
+      :tax_rate: 15.0
+    :book: 
+      :tax_rate: 0.0
+      :tax_treatment: :exempt
+      :tax_scope: :limited
+    :ebook: 
+      :tax_rate: 15.0
+      :tax_treatment: :default
+      :tax_scope: :na
+  IN: 
+    :default: 
+      :tax_rate: 13.5
+    :book: 
+      :tax_rate: 0.0
+      :tax_treatment: :exempt
+      :tax_scope: :all
+    :ebook: 
+      :tax_rate: 0.0
+      :tax_treatment: :exempt
+      :tax_scope: :unknown
+  ID: 
+    :default: 
+      :tax_rate: 10.0
+    :book: 
+      :tax_rate: 0.0
+      :tax_treatment: :exempt
+      :tax_scope: :limited
+    :ebook: 
+      :tax_rate: 10.0
+      :tax_treatment: :default
+      :tax_scope: :na
+  IR: 
+    :default: 
+      :tax_rate: 1.5
+    :book: 
+      :tax_rate: 0.0
+      :tax_treatment: :exempt
+      :tax_scope: :all
+    :ebook: 
+      :tax_rate: 0.0
+      :tax_treatment: :unknown
+      :tax_scope: :unknown
+  JP: 
+    :default: 
+      :tax_rate: 5.0
+    :book: 
+      :tax_rate: 0.0
+      :tax_treatment: :exempt
+      :tax_scope: :limited
+    :ebook: 
+      :tax_rate: 0.0
+      :tax_treatment: :special
+      :tax_scope: :limited
+  KR: 
+    :default: 
+      :tax_rate: 10.0
+    :book: 
+      :tax_rate: 0.0
+      :tax_treatment: :exempt
+      :tax_scope: :all
+    :ebook: 
+      :tax_rate: 0.0
+      :tax_treatment: :exempt
+      :tax_scope: :unknown
+  NZ: 
+    :default: 
+      :tax_rate: 15.0
+    :book: 
+      :tax_rate: 15.0
+      :tax_treatment: :default
+      :tax_scope: :na
+    :ebook: 
+      :tax_rate: 15.0
+      :tax_treatment: :default
+      :tax_scope: :na
+  PK: 
+    :default: 
+      :tax_rate: 17.0
+    :book: 
+      :tax_rate: 17.0
+      :tax_treatment: :default
+      :tax_scope: :na
+    :ebook: 
+      :tax_rate: 17.0
+      :tax_treatment: :default
+      :tax_scope: :na
+  PH: 
+    :default: 
+      :tax_rate: 12.0
+    :book: 
+      :tax_rate: 0.0
+      :tax_treatment: :exempt
+      :tax_scope: :all
+    :ebook: 
+      :tax_rate: 0.0
+      :tax_treatment: :unknown
+      :tax_scope: :unknown
+  SG: 
+    :default: 
+      :tax_rate: 7.0
+    :book: 
+      :tax_rate: 7.0
+      :tax_treatment: :default
+      :tax_scope: :na
+    :ebook: 
+      :tax_rate: 7.0
+      :tax_treatment: :default
+      :tax_scope: :na
+  TW: 
+    :default: 
+      :tax_rate: 5.0
+    :book: 
+      :tax_rate: 0.0
+      :tax_treatment: :exempt
+      :tax_scope: :limited
+    :ebook: 
+      :tax_rate: 5.0
+      :tax_treatment: :default
+      :tax_scope: :na
+  TH: 
+    :default: 
+      :tax_rate: 10.0
+    :book: 
+      :tax_rate: 0.0
+      :tax_treatment: :exempt
+      :tax_scope: :all
+    :ebook: 
+      :tax_rate: 0.0
+      :tax_treatment: :exempt
+      :tax_scope: :limited
+  VN: 
+    :default: 
+      :tax_rate: 10.0
+    :book: 
+      :tax_rate: 0.0
+      :tax_treatment: :exempt
+      :tax_scope: :limited
+    :ebook: 
+      :tax_rate: 0.0
+      :tax_treatment: :exempt
+      :tax_scope: :limited
+  AM: 
+    :default: 
+      :tax_rate: 20.0
+    :book: 
+      :tax_rate: 0.0
+      :tax_treatment: :exempt
+      :tax_scope: :limited
+    :ebook: 
+      :tax_rate: 20.0
+      :tax_treatment: :default
+      :tax_scope: :na
+  AT: 
+    :default: 
+      :tax_rate: 20.0
+    :book: 
+      :tax_rate: 10.0
+      :tax_treatment: :special
+      :tax_scope: :all
+    :ebook: 
+      :tax_rate: 20.0
+      :tax_treatment: :default
+      :tax_scope: :na
+  AZ: 
+    :default: 
+      :tax_rate: 18.0
+    :book: 
+      :tax_rate: 0.0
+      :tax_treatment: :exempt
+      :tax_scope: :limited
+    :ebook: 
+      :tax_rate: 18.0
+      :tax_treatment: :default
+      :tax_scope: :na
+  BE: 
+    :default: 
+      :tax_rate: 21.0
+    :book: 
+      :tax_rate: 6.0
+      :tax_treatment: :special
+      :tax_scope: :all
+    :ebook: 
+      :tax_rate: 21.0
+      :tax_treatment: :default
+      :tax_scope: :na
+  BA: 
+    :default: 
+      :tax_rate: 17.0
+    :book: 
+      :tax_rate: 17.0
+      :tax_treatment: :default
+      :tax_scope: :na
+    :ebook: 
+      :tax_rate: 17.0
+      :tax_treatment: :default
+      :tax_scope: :na
+  BG: 
+    :default: 
+      :tax_rate: 20.0
+    :book: 
+      :tax_rate: 0.0
+      :tax_treatment: :exempt
+      :tax_scope: :limited
+    :ebook: 
+      :tax_rate: 20.0
+      :tax_treatment: :default
+      :tax_scope: :na
+  HR: 
+    :default: 
+      :tax_rate: 23.0
+    :book: 
+      :tax_rate: 0.0
+      :tax_treatment: :special
+      :tax_scope: :limited
+    :ebook: 
+      :tax_rate: 0.0
+      :tax_treatment: :special
+      :tax_scope: :unknown
+  CY: 
+    :default: 
+      :tax_rate: 15.0
+    :book: 
+      :tax_rate: 5.0
+      :tax_treatment: :special
+      :tax_scope: :all
+    :ebook: 
+      :tax_rate: 15.0
+      :tax_treatment: :default
+      :tax_scope: :na
+  CZ: 
+    :default: 
+      :tax_rate: 20.0
+    :book: 
+      :tax_rate: 10.0
+      :tax_treatment: :special
+      :tax_scope: :all
+    :ebook: 
+      :tax_rate: 20.0
+      :tax_treatment: :default
+      :tax_scope: :na
+  DK: 
+    :default: 
+      :tax_rate: 25.0
+    :book: 
+      :tax_rate: 25.0
+      :tax_treatment: :default
+      :tax_scope: :na
+    :ebook: 
+      :tax_rate: 25.0
+      :tax_treatment: :default
+      :tax_scope: :na
+  EE: 
+    :default: 
+      :tax_rate: 20.0
+    :book: 
+      :tax_rate: 9.0
+      :tax_treatment: :special
+      :tax_scope: :all
+    :ebook: 
+      :tax_rate: 20.0
+      :tax_treatment: :default
+      :tax_scope: :na
+  FI: 
+    :default: 
+      :tax_rate: 23.0
+    :book: 
+      :tax_rate: 9.0
+      :tax_treatment: :special
+      :tax_scope: :all
+    :ebook: 
+      :tax_rate: 23.0
+      :tax_treatment: :default
+      :tax_scope: :na
+  FR:
+   -
+    :default:
+      :tax_rate: 19.6
+    :book:
+      :tax_rate: 5.5
+      :tax_treatment: :special
+      :tax_scope: :all
+    :ebook:
+      :tax_rate: 19.6
+      :tax_treatment: :special
+      :tax_scope: :limited
+    :end_at: 2011-12-31
+   -
+    :default:
+      :tax_rate: 19.6
+    :book: 
+      :tax_rate: 7.0
+      :tax_treatment: :special
+      :tax_scope: :all
+    :ebook: 
+      :tax_rate: 7.0
+      :tax_treatment: :special
+      :tax_scope: :limited
+    :end_at: 2012-12-31
+   -
+    :default:
+      :tax_rate: 19.6
+    :book:
+      :tax_rate: 5.5
+      :tax_treatment: :special
+      :tax_scope: :all
+    :ebook:
+      :tax_rate: 5.5
+      :tax_treatment: :special
+      :tax_scope: :limited
+  GE: 
+    :default: 
+      :tax_rate: 18.0
+    :book: 
+      :tax_rate: 0.0
+      :tax_treatment: :exempt
+      :tax_scope: :all
+    :ebook: 
+      :tax_rate: 0.0
+      :tax_treatment: :exempt
+      :tax_scope: :unknown
+  DE: 
+    :default: 
+      :tax_rate: 19.0
+    :book: 
+      :tax_rate: 7.0
+      :tax_treatment: :special
+      :tax_scope: :all
+    :ebook: 
+      :tax_rate: 19.0
+      :tax_treatment: :default
+      :tax_scope: :na
+  GR: 
+    :default: 
+      :tax_rate: 23.0
+    :book: 
+      :tax_rate: 6.5
+      :tax_treatment: :special
+      :tax_scope: :limited
+    :ebook: 
+      :tax_rate: 23.0
+      :tax_treatment: :default
+      :tax_scope: :na
+  HU: 
+    :default: 
+      :tax_rate: 25.0
+    :book: 
+      :tax_rate: 5.0
+      :tax_treatment: :special
+      :tax_scope: :all
+    :ebook: 
+      :tax_rate: 5.0
+      :tax_treatment: :special
+      :tax_scope: :limited
+  IS: 
+    :default: 
+      :tax_rate: 25.5
+    :book: 
+      :tax_rate: 7.0
+      :tax_treatment: :special
+      :tax_scope: :all
+    :ebook: 
+      :tax_rate: 7.0
+      :tax_treatment: :special
+      :tax_scope: :limited
+  IE: 
+    :default: 
+      :tax_rate: 21.0
+    :book: 
+      :tax_rate: 0.0
+      :tax_treatment: :special
+      :tax_scope: :all
+    :ebook: 
+      :tax_rate: 21.0
+      :tax_treatment: :default
+      :tax_scope: :na
+  IT: 
+    :default: 
+      :tax_rate: 20.0
+    :book: 
+      :tax_rate: 4.0
+      :tax_treatment: :special
+      :tax_scope: :all
+    :ebook: 
+      :tax_rate: 20.0
+      :tax_treatment: :default
+      :tax_scope: :na
+  LV: 
+    :default: 
+      :tax_rate: 22.0
+    :book: 
+      :tax_rate: 12.0
+      :tax_treatment: :special
+      :tax_scope: :all
+    :ebook: 
+      :tax_rate: 22.0
+      :tax_treatment: :default
+      :tax_scope: :na
+  LT: 
+    :default: 
+      :tax_rate: 21.0
+    :book: 
+      :tax_rate: 9.0
+      :tax_treatment: :special
+      :tax_scope: :all
+    :ebook: 
+      :tax_rate: 21.0
+      :tax_treatment: :default
+      :tax_scope: :na
+  LU: 
+    :default: 
+      :tax_rate: 15.0
+    :book: 
+      :tax_rate: 3.0
+      :tax_treatment: :special
+      :tax_scope: :all
+    :ebook: 
+      :tax_rate: 3.0
+      :tax_treatment: :special
+      :tax_scope: :limited
+  MK: 
+    :default: 
+      :tax_rate: 18.0
+    :book: 
+      :tax_rate: 5.0
+      :tax_treatment: :special
+      :tax_scope: :all
+    :ebook: 
+      :tax_rate: 18.0
+      :tax_treatment: :default
+      :tax_scope: :na
+  MT: 
+    :default: 
+      :tax_rate: 18.0
+    :book: 
+      :tax_rate: 5.0
+      :tax_treatment: :special
+      :tax_scope: :all
+    :ebook: 
+      :tax_rate: 18.0
+      :tax_treatment: :default
+      :tax_scope: :na
+  NL: 
+    :default: 
+      :tax_rate: 19.0
+    :book: 
+      :tax_rate: 6.0
+      :tax_treatment: :special
+      :tax_scope: :all
+    :ebook: 
+      :tax_rate: 6.0
+      :tax_treatment: :special
+      :tax_scope: :limited
+  "NO": 
+    :default: 
+      :tax_rate: 25.0
+    :book: 
+      :tax_rate: 0.0
+      :tax_treatment: :special
+      :tax_scope: :all
+    :ebook: 
+      :tax_rate: 0.0
+      :tax_treatment: :special
+      :tax_scope: :limited
+  PL: 
+    :default: 
+      :tax_rate: 23.0
+    :book: 
+      :tax_rate: 5.0
+      :tax_treatment: :special
+      :tax_scope: :all
+    :ebook: 
+      :tax_rate: 5.0
+      :tax_treatment: :special
+      :tax_scope: :limited
+  PT: 
+    :default: 
+      :tax_rate: 23.0
+    :book: 
+      :tax_rate: 6.0
+      :tax_treatment: :special
+      :tax_scope: :all
+    :ebook: 
+      :tax_rate: 6.0
+      :tax_treatment: :special
+      :tax_scope: :limited
+  RO: 
+    :default: 
+      :tax_rate: 24.0
+    :book: 
+      :tax_rate: 9.0
+      :tax_treatment: :special
+      :tax_scope: :all
+    :ebook: 
+      :tax_rate: 9.0
+      :tax_treatment: :special
+      :tax_scope: :limited
+  RU: 
+    :default: 
+      :tax_rate: 18.0
+    :book: 
+      :tax_rate: 10.0
+      :tax_treatment: :special
+      :tax_scope: :limited
+    :ebook: 
+      :tax_rate: 18.0
+      :tax_treatment: :default
+      :tax_scope: :na
+  RS: 
+    :default: 
+      :tax_rate: 18.0
+    :book: 
+      :tax_rate: 8.0
+      :tax_treatment: :special
+      :tax_scope: :all
+    :ebook: 
+      :tax_rate: 8.0
+      :tax_treatment: :special
+      :tax_scope: :unknown
+  SK: 
+    :default: 
+      :tax_rate: 20.0
+    :book: 
+      :tax_rate: 10.0
+      :tax_treatment: :special
+      :tax_scope: :all
+    :ebook: 
+      :tax_rate: 20.0
+      :tax_treatment: :default
+      :tax_scope: :na
+  SI: 
+    :default: 
+      :tax_rate: 20.0
+    :book: 
+      :tax_rate: 8.5
+      :tax_treatment: :special
+      :tax_scope: :all
+    :ebook: 
+      :tax_rate: 8.5
+      :tax_treatment: :special
+      :tax_scope: :limited
+  ES: 
+    :default: 
+      :tax_rate: 18.0
+    :book: 
+      :tax_rate: 4.0
+      :tax_treatment: :special
+      :tax_scope: :all
+    :ebook: 
+      :tax_rate: 4.0
+      :tax_treatment: :special
+      :tax_scope: :limited
+  SE: 
+    :default: 
+      :tax_rate: 25.0
+    :book: 
+      :tax_rate: 6.0
+      :tax_treatment: :special
+      :tax_scope: :all
+    :ebook: 
+      :tax_rate: 6.0
+      :tax_treatment: :special
+      :tax_scope: :limited
+  CH: 
+    :default: 
+      :tax_rate: 8.0
+    :book: 
+      :tax_rate: 2.5
+      :tax_treatment: :special
+      :tax_scope: :limited
+    :ebook: 
+      :tax_rate: 8.0
+      :tax_treatment: :default
+      :tax_scope: :na
+  TR: 
+    :default: 
+      :tax_rate: 18.0
+    :book: 
+      :tax_rate: 8.0
+      :tax_treatment: :special
+      :tax_scope: :all
+    :ebook: 
+      :tax_rate: 8.0
+      :tax_treatment: :special
+      :tax_scope: :limited
+  UA: 
+    :default: 
+      :tax_rate: 20.0
+    :book: 
+      :tax_rate: 0.0
+      :tax_treatment: :exempt
+      :tax_scope: :limited
+    :ebook: 
+      :tax_rate: 0.0
+      :tax_treatment: :exempt
+      :tax_scope: :limited
+  GB: 
+    :default: 
+      :tax_rate: 20.0
+    :book: 
+      :tax_rate: 0.0
+      :tax_treatment: :special
+      :tax_scope: :all
+    :ebook: 
+      :tax_rate: 20.0
+      :tax_treatment: :default
+      :tax_scope: :na
+  DZ: 
+    :default: 
+      :tax_rate: 17.0
+    :book: 
+      :tax_rate: 7.0
+      :tax_treatment: :special
+      :tax_scope: :all
+    :ebook: 
+      :tax_rate: 17.0
+      :tax_treatment: :default
+      :tax_scope: :na
+  EG: 
+    :default: 
+      :tax_rate: 0.0
+    :book: 
+      :tax_rate: 0.0
+      :tax_treatment: :exempt
+      :tax_scope: :all
+    :ebook: 
+      :tax_rate: 0.0
+      :tax_treatment: :special
+      :tax_scope: :unknown
+  IL: 
+    :default: 
+      :tax_rate: 16.0
+    :book: 
+      :tax_rate: 0.0
+      :tax_treatment: :exempt
+      :tax_scope: :limited
+    :ebook: 
+      :tax_rate: 16.0
+      :tax_treatment: :default
+      :tax_scope: :na
+  JO: 
+    :default: 
+      :tax_rate: 16.0
+    :book: 
+      :tax_rate: 0.0
+      :tax_treatment: :exempt
+      :tax_scope: :limited
+    :ebook: 
+      :tax_rate: 0.0
+      :tax_treatment: :unknown
+      :tax_scope: :unknown
+  LB: 
+    :default: 
+      :tax_rate: 10.0
+    :book: 
+      :tax_rate: 0.0
+      :tax_treatment: :exempt
+      :tax_scope: :limited
+    :ebook: 
+      :tax_rate: 10.0
+      :tax_treatment: :default
+      :tax_scope: :na
+  MA: 
+    :default: 
+      :tax_rate: 20.0
+    :book: 
+      :tax_rate: 0.0
+      :tax_treatment: :exempt
+      :tax_scope: :all
+    :ebook: 
+      :tax_rate: 0.0
+      :tax_treatment: :exempt
+      :tax_scope: :limited
+  TN: 
+    :default: 
+      :tax_rate: 18.0
+    :book: 
+      :tax_rate: 0.0
+      :tax_treatment: :exempt
+      :tax_scope: :limited
+    :ebook: 
+      :tax_rate: 18.0
+      :tax_treatment: :default
+      :tax_scope: :na
+  YE: 
+    :default: 
+      :tax_rate: 5.0
+    :book: 
+      :tax_rate: 5.0
+      :tax_treatment: :default
+      :tax_scope: :na
+    :ebook: 
+      :tax_rate: 5.0
+      :tax_treatment: :default
+      :tax_scope: :na
+  BW: 
+    :default: 
+      :tax_rate: 12.0
+    :book: 
+      :tax_rate: 12.0
+      :tax_treatment: :default
+      :tax_scope: :na
+    :ebook: 
+      :tax_rate: 0.0
+      :tax_treatment: :unknown
+      :tax_scope: :unknown
+  CM: 
+    :default: 
+      :tax_rate: 19.25
+    :book: 
+      :tax_rate: 0.0
+      :tax_treatment: :exempt
+      :tax_scope: :all
+    :ebook: 
+      :tax_rate: 0.0
+      :tax_treatment: :exempt
+      :tax_scope: :unknown
+  GH: 
+    :default: 
+      :tax_rate: 12.5
+    :book: 
+      :tax_rate: 0.0
+      :tax_treatment: :exempt
+      :tax_scope: :limited
+    :ebook: 
+      :tax_rate: 0.0
+      :tax_treatment: :exempt
+      :tax_scope: :unknown
+  KE: 
+    :default: 
+      :tax_rate: 16.0
+    :book: 
+      :tax_rate: 0.0
+      :tax_treatment: :exempt
+      :tax_scope: :limited
+    :ebook: 
+      :tax_rate: 0.0
+      :tax_treatment: :exempt
+      :tax_scope: :limited
+  MW: 
+    :default: 
+      :tax_rate: 16.5
+    :book: 
+      :tax_rate: 0.0
+      :tax_treatment: :exempt
+      :tax_scope: :limited
+    :ebook: 
+      :tax_rate: 0.0
+      :tax_treatment: :exempt
+      :tax_scope: :limited
+  MU: 
+    :default: 
+      :tax_rate: 15.0
+    :book: 
+      :tax_rate: 0.0
+      :tax_treatment: :special
+      :tax_scope: :all
+    :ebook: 
+      :tax_rate: 0.0
+      :tax_treatment: :special
+      :tax_scope: :unknown
+  MZ: 
+    :default: 
+      :tax_rate: 17.0
+    :book: 
+      :tax_rate: 0.0
+      :tax_treatment: :exempt
+      :tax_scope: :limited
+    :ebook: 
+      :tax_rate: 0.0
+      :tax_treatment: :unknown
+      :tax_scope: :unknown
+  NA: 
+    :default: 
+      :tax_rate: 15.0
+    :book: 
+      :tax_rate: 0.0
+      :tax_treatment: :unknown
+      :tax_scope: :unknown
+    :ebook: 
+      :tax_rate: 15.0
+      :tax_treatment: :default
+      :tax_scope: :na
+  NG: 
+    :default: 
+      :tax_rate: 5.0
+    :book: 
+      :tax_rate: 0.0
+      :tax_treatment: :exempt
+      :tax_scope: :all
+    :ebook: 
+      :tax_rate: 0.0
+      :tax_treatment: :unknown
+      :tax_scope: :unknown
+  SN: 
+    :default: 
+      :tax_rate: 18.0
+    :book: 
+      :tax_rate: 0.0
+      :tax_treatment: :exempt
+      :tax_scope: :all
+    :ebook: 
+      :tax_rate: 0.0
+      :tax_treatment: :exempt
+      :tax_scope: :unknown
+  ZA: 
+    :default: 
+      :tax_rate: 14.0
+    :book: 
+      :tax_rate: 14.0
+      :tax_treatment: :default
+      :tax_scope: :na
+    :ebook: 
+      :tax_rate: 0.0
+      :tax_treatment: :special
+      :tax_scope: :limited
+  TZ: 
+    :default: 
+      :tax_rate: 18.0
+    :book: 
+      :tax_rate: 0.0
+      :tax_treatment: :exempt
+      :tax_scope: :limited
+    :ebook: 
+      :tax_rate: 0.0
+      :tax_treatment: :unknown
+      :tax_scope: :unknown
+  UG: 
+    :default: 
+      :tax_rate: 18.0
+    :book: 
+      :tax_rate: 0.0
+      :tax_treatment: :special
+      :tax_scope: :limited
+    :ebook: 
+      :tax_rate: 18.0
+      :tax_treatment: :default
+      :tax_scope: :na
+  ZW: 
+    :default: 
+      :tax_rate: 15.0
+    :book: 
+      :tax_rate: 0.0
+      :tax_treatment: :exempt
+      :tax_scope: :limited
+    :ebook: 
+      :tax_rate: 0.0
+      :tax_treatment: :unknown
+      :tax_scope: :unknown
+  AR: 
+    :default: 
+      :tax_rate: 21.0
+    :book: 
+      :tax_rate: 0.0
+      :tax_treatment: :exempt
+      :tax_scope: :limited
+    :ebook: 
+      :tax_rate: 0.0
+      :tax_treatment: :unknown
+      :tax_scope: :unknown
+  BO: 
+    :default: 
+      :tax_rate: 13.0
+    :book: 
+      :tax_rate: 13.0
+      :tax_treatment: :default
+      :tax_scope: :na
+    :ebook: 
+      :tax_rate: 13.0
+      :tax_treatment: :default
+      :tax_scope: :na
+  BR: 
+    :default: 
+      :tax_rate: 18.0
+    :book: 
+      :tax_rate: 0.0
+      :tax_treatment: :exempt
+      :tax_scope: :all
+    :ebook: 
+      :tax_rate: 0.0
+      :tax_treatment: :unknown
+      :tax_scope: :unknown
+  CO: 
+    :default: 
+      :tax_rate: 16.0
+    :book: 
+      :tax_rate: 0.0
+      :tax_treatment: :exempt
+      :tax_scope: :limited
+    :ebook: 
+      :tax_rate: 0.0
+      :tax_treatment: :exempt
+      :tax_scope: :limited
+  EC: 
+    :default: 
+      :tax_rate: 12.0
+    :book: 
+      :tax_rate: 0.0
+      :tax_treatment: :special
+      :tax_scope: :all
+    :ebook: 
+      :tax_rate: 0.0
+      :tax_treatment: :special
+      :tax_scope: :limited
+  MX: 
+    :default: 
+      :tax_rate: 15.0
+    :book: 
+      :tax_rate: 0.0
+      :tax_treatment: :exempt
+      :tax_scope: :limited
+    :ebook: 
+      :tax_rate: 0.0
+      :tax_treatment: :unknown
+      :tax_scope: :unknown
+  PA: 
+    :default: 
+      :tax_rate: 7.0
+    :book: 
+      :tax_rate: 0.0
+      :tax_treatment: :exempt
+      :tax_scope: :limited
+    :ebook: 
+      :tax_rate: 0.0
+      :tax_treatment: :exempt
+      :tax_scope: :limited
+  PE: 
+    :default: 
+      :tax_rate: 19.0
+    :book: 
+      :tax_rate: 0.0
+      :tax_treatment: :exempt
+      :tax_scope: :limited
+    :ebook: 
+      :tax_rate: 0.0
+      :tax_treatment: :special
+      :tax_scope: :limited
+  UY: 
+    :default: 
+      :tax_rate: 22.0
+    :book: 
+      :tax_rate: 0.0
+      :tax_treatment: :exempt
+      :tax_scope: :all
+    :ebook: 
+      :tax_rate: 0.0
+      :tax_treatment: :exempt
+      :tax_scope: :limited
+  VE: 
+    :default: 
+      :tax_rate: 12.0
+    :book: 
+      :tax_rate: 0.0
+      :tax_treatment: :exempt
+      :tax_scope: :all
+    :ebook: 
+      :tax_rate: 0.0
+      :tax_treatment: :unknown
+      :tax_scope: :unknown
+  CA: 
+    :default: 
+      :tax_rate: 5.0
+    :book: 
+      :tax_rate: 5.0
+      :tax_treatment: :default
+      :tax_scope: :na
+    :ebook: 
+      :tax_rate: 5.0
+      :tax_treatment: :default
+      :tax_scope: :na

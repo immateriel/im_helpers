@@ -1,0 +1,199 @@
+# -*- encoding : utf-8 -*-
+require "htmlentities"
+
+module ImHelpers
+  module StringMethods
+    def strip_spaces
+      gsub(/\s+/, " ")
+    end
+
+    def each_utf8_char_with_index
+      i = -1
+      scan(/./mu) { |c| i+=1; yield(c, i) }
+    end
+
+    def cut_utf8(p, l) # (index) position, length
+      raise(ArgumentError, "Error: argument is not Fixnum", caller) if p.class != Fixnum or l.class != Fixnum
+      s = self.length_utf8
+      #if p < 0 then p = s - p.abs end
+      if p < 0 then
+        p.abs > s ? (p = 0) : (p = s - p.abs)
+      end #  or:  ... p.abs > s ? (return nil) : ...
+      return nil if l > s or p > (s - 1)
+      ret = ""
+      count = 0
+      each_utf8_char_with_index do |c, i|
+        break if count >= l
+        if i >= p && count < l then
+          count += 1; ret << c;
+        end
+      end
+      ret
+    end
+
+    def length_utf8
+      #scan(/./mu).size
+      count = 0
+      scan(/./mu) { count += 1 }
+      count
+    end
+
+    def clean_cut(max_length, ellipsis="...")
+      if self.to_s.length_utf8 > max_length
+        new_str=self.to_s.cut_utf8(0, max_length)
+        #[0..max_length]
+        new_str.gsub!(/(.*)(,|\.).*$/, '\1\2')
+        if new_str =~ /,$/
+          new_str=new_str+" "+ellipsis
+        end
+        if new_str==self.to_s.cut_utf8(0, max_length)
+          #[0..max_length]
+          new_str.gsub!(/(.*) .*$/, '\1')
+          new_str=new_str+" "+ellipsis
+        end
+        new_str
+      else
+        self.to_s
+      end
+    end
+
+    def to_b
+      self.to_i.to_b
+    end
+
+    def self.dameraulevenshtein(seq1, seq2)
+      oneago = nil
+      thisrow = (1..seq2.size).to_a + [0]
+      seq1.size.times do |x|
+        twoago, oneago, thisrow = oneago, thisrow, [0] * seq2.size + [x + 1]
+        seq2.size.times do |y|
+          delcost = oneago[y] + 1
+          addcost = thisrow[y - 1] + 1
+          subcost = oneago[y - 1] + ((seq1[x] != seq2[y]) ? 1 : 0)
+          thisrow[y] = [delcost, addcost, subcost].min
+          if (x > 0 and y > 0 and seq1[x] == seq2[y-1] and seq1[x-1] == seq2[y] and seq1[x] != seq2[y])
+            thisrow[y] = [thisrow[y], twoago[y-2] + 1].min
+          end
+        end
+      end
+      return thisrow[seq2.size - 1]
+    end
+
+    def dameraulevenshtein(str)
+      StringMethods.dameraulevenshtein(self, str)
+    end
+
+    def translit
+      begin
+        self.to_ascii
+      rescue
+        # if there is a problem, remove chars
+        self.to_s.encode("ascii", :invalid => :replace, :undef => :replace, :replace => "")
+      end
+    end
+
+    def maybe_latin1_to_s
+      if self.encoding.to_s == "ASCII-8BIT"
+        self.force_encoding "UTF-8"
+      end
+      if self.valid_encoding?
+        self
+      else
+        self.force_encoding("ISO-8859-15").encode("UTF-8")
+      end
+    end
+
+    def downcase
+      Unicode.downcase self
+    end
+
+    def upcase
+      Unicode.upcase self
+    end
+
+    def capitalize
+      Unicode.capitalize self
+    end
+
+    def namecase
+      downcase.gsub(/\b(\p{Word})/) { $1.capitalize }
+    end
+
+    def simplify_unicode
+      self.to_s.gsub(/œ/, "oe").gsub(/Œ/, "OE").gsub(/Æ/, "Ae").gsub(/’/, "'")
+    end
+  end
+
+  module HtmlMethods
+    # transform HTML to plain text
+    def strip_html(allowed = [])
+      re = if allowed.any?
+             Regexp.new(
+                 %(<(?!(\\s|\\/)*(#{
+                 allowed.map { |tag| Regexp.escape(tag) }.join("|")
+                 })( |>|\\/|'|"|<|\\s*\\z))[^>]*(>+|\\s*\\z)),
+                 Regexp::IGNORECASE | Regexp::MULTILINE, 'u'
+             )
+           else
+             /<[^>]*(>+|\s*\z)/m
+           end
+      coder=HTMLEntities.new
+      coder.decode(self.gsub(re, ''))
+    end
+
+    # basicly transform modern html to html3
+    def purify_html
+      doc= Nokogiri::XML::DocumentFragment.parse(self.to_s)
+      doc.search(".//strong").each do |e|
+        e.swap "<b>#{e.inner_html}</b>"
+      end
+      doc.search(".//h4").each do |e|
+        e.swap "<b>#{e.inner_html}</b>"
+      end
+      doc.search(".//h3").each do |e|
+        e.swap "<b>#{e.inner_html}</b>"
+      end
+      doc.search(".//h2").each do |e|
+        e.swap "<b>#{e.inner_html}</b>"
+      end
+      doc.search(".//h1").each do |e|
+        e.swap "<b>#{e.inner_html}</b>"
+      end
+
+      doc.search(".//em").each do |e|
+        e.swap "<i>#{e.inner_html}</i>"
+      end
+      doc.search(".//div").each do |e|
+        e.swap "#{e.inner_html}<br/>"
+      end
+      doc.search(".//p").each do |e|
+        e.swap "#{e.inner_html}<br/>"
+      end
+
+      doc.search(".//ul").each do |e|
+        e.swap "#{e.inner_html}"
+      end
+      doc.search(".//ol").each do |e|
+        e.swap "#{e.inner_html}"
+      end
+      doc.search(".//li").each do |e|
+        e.swap "#{e.inner_html}<br>"
+      end
+      doc.search(".//span").each do |e|
+        e.swap "#{e.inner_html}"
+      end
+
+      doc.to_xml(:encoding => "UTF-8")
+    end
+
+    # cut html to len
+    def clean_truncate_html(len=30, ellipsis="...")
+      Nokogiri::HTML::DocumentFragment.parse(HTML_Truncator.truncate(self, len, :ellipsis => ellipsis, :length_in_chars => true)).to_xhtml
+    end
+
+    def strip_entities
+      gsub(/&(#?)(.+?);/, '')
+    end
+
+  end
+end
