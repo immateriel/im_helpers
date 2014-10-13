@@ -82,7 +82,7 @@ module Territories
   end
 
   def self.currencies
-    ["USD", "CAD", "GBP", "AUD", "CHF", "DKK", "NOK", "SEK", "KRW", "ZAR", "BRL", "SGD", "MXN", "NZD", "EUR"]
+    ["USD", "CAD", "GBP", "AUD", "CHF", "DKK", "NOK", "SEK", "KRW", "ZAR", "BRL", "SGD", "MXN", "NZD", "JPY", "EUR"]
   end
 
   def self.first_level_countries(countries)
