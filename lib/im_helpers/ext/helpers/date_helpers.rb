@@ -32,13 +32,6 @@ module ImHelpers
       end
     end
 
-    # helpers
-    def self.each_between(start_at, end_at, &block)
-      ((end_at - start_at)+1).to_i.times do |i|
-        yield(start_at+i.days)
-      end
-    end
-
     def first_day_of_month
       Date.new(self.year, self.month, 1)
     end
