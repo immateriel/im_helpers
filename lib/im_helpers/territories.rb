@@ -94,7 +94,6 @@ module Territories
     if ct and ct.currency
       ct.currency.code
     else
-      Immateriel.warn binding, "no currency found for #{country}"
       nil
     end
   end
