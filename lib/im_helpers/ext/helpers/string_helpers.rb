@@ -3,6 +3,8 @@ require "htmlentities"
 
 module ImHelpers
   module StringMethods
+    PARTICLES = %w{d de des du l la le les von}
+
     def strip_spaces
       gsub(/\s+/, " ")
     end
@@ -127,7 +129,7 @@ module ImHelpers
     end
 
     def namecase
-      downcase.gsub(/\b(\p{Word})/) { $1.capitalize }
+      downcase.gsub(/(\p{Word}+)/) { PARTICLES.include?($1) ? $1 : $1.capitalize  }
     end
 
     def simplify_unicode
