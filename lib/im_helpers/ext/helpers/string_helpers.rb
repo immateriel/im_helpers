@@ -2,6 +2,7 @@
 require "htmlentities"
 
 module ImHelpers
+
   module StringMethods
     PARTICLES = %w{d de des du l la le les von}
 
@@ -116,17 +117,6 @@ module ImHelpers
       end
     end
 
-    def downcase
-      Unicode.downcase self
-    end
-
-    def upcase
-      Unicode.upcase self
-    end
-
-    def capitalize
-      Unicode.capitalize self
-    end
 
     def namecase
       downcase.gsub(/(\p{Word}+)/) { PARTICLES.include?($1) ? $1 : $1.capitalize  }
