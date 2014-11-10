@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["julbouln"]
-  s.date = "2014-10-08"
+  s.date = "2014-11-10"
   s.description = "immat\u{e9}riel.fr helpers lib"
   s.email = "jboulnois@immateriel.fr"
   s.extra_rdoc_files = [
@@ -40,6 +40,7 @@ Gem::Specification.new do |s|
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<nokogiri>, [">= 0"])
       s.add_runtime_dependency(%q<htmlentities>, [">= 0"])
+      s.add_runtime_dependency(%q<unidecoder>, [">= 0"])
       s.add_runtime_dependency(%q<html_truncator>, [">= 0"])
       s.add_runtime_dependency(%q<iso-639>, [">= 0"])
       s.add_runtime_dependency(%q<countries>, [">= 0"])
@@ -49,6 +50,7 @@ Gem::Specification.new do |s|
     else
       s.add_dependency(%q<nokogiri>, [">= 0"])
       s.add_dependency(%q<htmlentities>, [">= 0"])
+      s.add_dependency(%q<unidecoder>, [">= 0"])
       s.add_dependency(%q<html_truncator>, [">= 0"])
       s.add_dependency(%q<iso-639>, [">= 0"])
       s.add_dependency(%q<countries>, [">= 0"])
@@ -59,6 +61,7 @@ Gem::Specification.new do |s|
   else
     s.add_dependency(%q<nokogiri>, [">= 0"])
     s.add_dependency(%q<htmlentities>, [">= 0"])
+    s.add_dependency(%q<unidecoder>, [">= 0"])
     s.add_dependency(%q<html_truncator>, [">= 0"])
     s.add_dependency(%q<iso-639>, [">= 0"])
     s.add_dependency(%q<countries>, [">= 0"])

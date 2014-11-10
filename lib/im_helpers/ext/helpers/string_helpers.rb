@@ -1,5 +1,6 @@
 # -*- encoding : utf-8 -*-
 require "htmlentities"
+require 'unidecoder'
 
 module ImHelpers
 

@@ -13,6 +13,7 @@ begin
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/  20 for additional settings
     gem.add_dependency "nokogiri"
     gem.add_dependency "htmlentities"
+    gem.add_dependency "unidecoder"
     gem.add_dependency "html_truncator"
     gem.add_dependency "iso-639"
     gem.add_dependency "countries"
