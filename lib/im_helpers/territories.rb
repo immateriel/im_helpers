@@ -45,8 +45,7 @@ module Territories
   end
 
   def self.european_union
-    ["BE", "BG", "CZ", "DK", "DE", "EE", "IE", "EL", "GR", "ES", "FR", "IT", "CY", "LV", "LT", "LU", "HU",
-     "MT", "NL", "AT", "PL", "PT", "RO", "SI", "SK", "FI", "SE", "UK", "GB"]
+    ["AT", "BE", "BG", "HR", "CY", "CZ", "DK", "EE", "FI", "FR", "DE", "GR", "HU", "IE", "IT", "LV", "LT", "LU", "MT", "NL", "PL", "PT", "RO", "SK", "SI", "ES", "SE", "GB"]
   end
 
   def self.europe
@@ -124,6 +123,8 @@ module Territories
 
   @@tax_rates=nil
 
+
+  # see http://www.vatlive.com
   def self.tax_rates
     @@tax_rates || @@tax_rates=YAML.load_file(File.dirname(__FILE__) + '/../../config/tax_rates.yml')[:tax_rates]
   end
