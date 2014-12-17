@@ -133,8 +133,13 @@ module Territories
     @@tax_rates || @@tax_rates=YAML.load_file(File.dirname(__FILE__) + '/../../config/tax_rates.yml')[:tax_rates]
   end
 
+  def self.country_ebook_vat_at_date(country,date)
+    self.country_tax_rates_at(country, date)[:ebook][:tax_rate]
+  end
+
+  # implicit "current"
   def self.country_ebook_vat(country)
-    self.country_tax_rates_at(country, Date.today)[:ebook][:tax_rate]
+    self.country_ebook_vat_at_date(country,Date.today)
   end
 
   def self.country_tax_rates_at(country, date)
