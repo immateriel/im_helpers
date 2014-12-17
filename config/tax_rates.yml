@@ -600,9 +600,9 @@
       :tax_treatment: :special
       :tax_scope: :all
     :ebook: 
-      :tax_rate: 0.0
-      :tax_treatment: :special
-      :tax_scope: :limited
+      :tax_rate: 25.0
+      :tax_treatment: :default
+      :tax_scope: :na
   PL:
     :default:
       :tax_rate: 23.0
