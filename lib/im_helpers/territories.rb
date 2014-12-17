@@ -84,6 +84,10 @@ module Territories
     ["USD", "CAD", "GBP", "AUD", "CHF", "DKK", "NOK", "SEK", "KRW", "ZAR", "BRL", "SGD", "MXN", "NZD", "JPY", "EUR"]
   end
 
+  def self.is_country_in_european_union?(country)
+    self.european_union.include?(country)
+  end
+
   def self.first_level_countries(countries)
     countries & self.world
   end
