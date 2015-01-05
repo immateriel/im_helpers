@@ -125,12 +125,11 @@ module Territories
     Country.all.map { |c| Country.new(c.last) }.map { |c| c.currency }.compact.map { |c| c.code }.uniq
   end
 
-  @@tax_rates=nil
-
-
   # see http://www.vatlive.com
+  @@tax_rates=YAML.load_file(File.dirname(__FILE__) + '/../../config/tax_rates.yml')[:tax_rates]
+
   def self.tax_rates
-    @@tax_rates || @@tax_rates=YAML.load_file(File.dirname(__FILE__) + '/../../config/tax_rates.yml')[:tax_rates]
+    @@tax_rates
   end
 
   def self.country_ebook_vat_at_date(country,date)
