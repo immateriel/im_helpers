@@ -146,14 +146,8 @@ module Territories
     if trs.class==Array
       ctr=nil
 
-      utrs=trs.dup
-      utrs.each do |t|
-        unless t[:end_at]
-          t[:end_at]=date
-        end
-      end
-      utrs.sort { |a, b| b[:end_at] <=> a[:end_at] }.each do |tr|
-        if date <= tr[:end_at]
+      trs.sort { |a, b| (b[:end_at]||date) <=> (a[:end_at]||date) }.each do |tr|
+        if date <= (tr[:end_at]||date)
           ctr=tr
         end
       end
