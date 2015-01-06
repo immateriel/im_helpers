@@ -142,12 +142,13 @@ module Territories
   end
 
   def self.country_tax_rates_at(country, date)
+    future=Date.new(3000,1,1)
     trs=self.tax_rates[country]
     if trs.class==Array
       ctr=nil
 
-      trs.sort { |a, b| (b[:end_at]||date) <=> (a[:end_at]||date) }.each do |tr|
-        if date <= (tr[:end_at]||date)
+      trs.sort { |a, b| (b[:end_at]||future) <=> (a[:end_at]||future) }.each do |tr|
+        if date <= (tr[:end_at]||future)
           ctr=tr
         end
       end
