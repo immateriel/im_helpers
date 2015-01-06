@@ -149,7 +149,7 @@ module Territories
       utrs=trs.dup
       utrs.each do |t|
         unless t[:end_at]
-          t[:end_at]=Date.today
+          t[:end_at]=date
         end
       end
       utrs.sort { |a, b| b[:end_at] <=> a[:end_at] }.each do |tr|
