@@ -3,20 +3,29 @@
 # http://software77.net/geo-ip/
 module ImHelpers
 module IpToCountry
+    @default_dir="/tmp"
+    def self.default_dir
+      @default_dir
+    end
+
+    def self.default_dir=v
+      @default_dir=v
+    end
+
     def self.get(ip)
-      unless File.exists?("/tmp/IpToCountry.csv")
+      unless File.exists?("#{self.default_dir}/IpToCountry.csv")
         self.download
       end
-      unless File.exist?("/tmp/packed-ip.dat")
+      unless File.exist?("#{self.default_dir}/tmp/packed-ip.dat")
         self.packing
       end
       self.search(ip)
     end
 
     def self.download
-      system("wget software77.net/geo-ip/?DL=1 -O /tmp/IpToCountry.csv.tmp.gz")
-      system("gunzip /tmp/IpToCountry.csv.tmp.gz")
-      system("mv /tmp/IpToCountry.csv.tmp /tmp/IpToCountry.csv")
+      system("wget software77.net/geo-ip/?DL=1 -O #{self.default_dir}/IpToCountry.csv.tmp.gz")
+      system("gunzip #{self.default_dir}/IpToCountry.csv.tmp.gz")
+      system("mv #{self.default_dir}/IpToCountry.csv.tmp #{self.default_dir}/IpToCountry.csv")
     end
 
     def self.update
@@ -28,8 +37,8 @@ module IpToCountry
       last_start=nil
       last_end=nil
       last_country=nil
-      File.open("/tmp/packed-ip.dat","wb") do |wfile|
-        IO.foreach("/tmp/IpToCountry.csv", :encoding => "ISO-8859-1") do |line|
+      File.open("#{self.default_dir}/packed-ip.dat","wb") do |wfile|
+        IO.foreach("#{self.default_dir}/IpToCountry.csv", :encoding => "ISO-8859-1") do |line|
           next if !(line =~ /^"/ )
           s,e,d1,d2,co=line.delete!("\"").split(",")
           s,e = s.to_i,e.to_i
@@ -56,7 +65,7 @@ module IpToCountry
 
     def self.search(ip)
       # the binary table file is looked up with each request
-      File.open("/tmp/packed-ip.dat","rb") do |rfile|
+      File.open("#{self.default_dir}/packed-ip.dat","rb") do |rfile|
         rfile.seek(0,IO::SEEK_END)
         record_max=rfile.pos/10-1
         ipstr= ip.split(".").map {|x| x.to_i.chr}.join
