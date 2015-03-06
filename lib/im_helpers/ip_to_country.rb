@@ -16,7 +16,7 @@ module IpToCountry
       unless File.exists?("#{self.default_dir}/IpToCountry.csv")
         self.download
       end
-      unless File.exist?("#{self.default_dir}/tmp/packed-ip.dat")
+      unless File.exist?("#{self.default_dir}/packed-ip.dat")
         self.packing
       end
       self.search(ip)
