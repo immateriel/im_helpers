@@ -120,7 +120,7 @@ module ImHelpers
 
 
     def namecase
-      downcase.gsub(/(\p{Word}+)/) { PARTICLES.include?($1) ? $1 : $1.capitalize  }
+      downcase.gsub(/(\p{Word}+\.?)/) { PARTICLES.include?($1) ? $1 : $1.capitalize }
     end
 
     def simplify_unicode
