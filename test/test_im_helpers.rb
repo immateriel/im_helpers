@@ -30,9 +30,20 @@ class TestImOnix < Test::Unit::TestCase
     should "prec float" do
       assert_equal 1.23,1.23456789.prec(2)
     end
-
-
   end
+
+  context '#namecase' do
+    should 'not capitalize particles but initials' do
+      assert_equal 'J. R. R. Tolkien', 'J. r. R. tolKien'.namecase
+      assert_equal 'Jean de la Fontaine', 'jean DE La fonTAINE'.namecase
+    end
+
+    should 'capitalize initials which are particle letters' do
+      assert_equal 'Sarah Agnès L.', 'Sarah Agnès L.'.namecase
+      assert_equal 'D. R. Burrow', 'd. r. BurRow'.namecase
+    end
+  end
+
   context "language" do
     setup do
     end
