@@ -500,6 +500,18 @@
       :tax_rate: 22.0
       :tax_treatment: :default
       :tax_scope: :na
+    :end_at: 2014-12-31
+   -
+    :default:
+      :tax_rate: 22.0
+    :book:
+      :tax_rate: 4.0
+      :tax_treatment: :special
+      :tax_scope: :all
+    :ebook:
+      :tax_rate: 4.0
+      :tax_treatment: :default
+      :tax_scope: :na
   LV:
    -
     :default: 
@@ -1132,6 +1144,6 @@
       :tax_treatment: :default
       :tax_scope: :na
     :ebook: 
-      :tax_rate: 5.0
+      :tax_rate: 0.0
       :tax_treatment: :default
       :tax_scope: :na
