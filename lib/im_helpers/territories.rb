@@ -64,7 +64,7 @@ module Territories
   end
 
   def self.outremer
-    ["RE", "GP", "MQ", "GF", "YT"]
+    ["RE", "GP", "MQ", "GF", "YT", "PF"]
   end
 
   def self.north_america
