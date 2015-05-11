@@ -548,17 +548,30 @@
       :tax_treatment: :default
       :tax_scope: :na
   LU:
-    :default: 
-      :tax_rate: 15.0
-    :book: 
-      :tax_rate: 3.0
-      :tax_treatment: :special
-      :tax_scope: :all
-    :ebook: 
-      :tax_rate: 3.0
-      :tax_treatment: :special
+    -
+      :default:
+        :tax_rate: 15.0
+      :book:
+        :tax_rate: 3.0
+        :tax_treatment: :special
+        :tax_scope: :all
+      :ebook:
+        :tax_rate: 3.0
+        :tax_treatment: :special
       :tax_scope: :limited
-  MK: 
+      :end_at: 2015-04-30
+    -
+      :default:
+        :tax_rate: 17.0
+      :book:
+        :tax_rate: 3.0
+        :tax_treatment: :special
+        :tax_scope: :all
+      :ebook:
+        :tax_rate: 17.0
+        :tax_treatment: :default
+        :tax_scope: :na
+  MK:
     :default: 
       :tax_rate: 18.0
     :book: 
