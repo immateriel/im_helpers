@@ -39,6 +39,25 @@ module Territories
      "VU", "WS", "YE", "ZA", "ZM", "ZW"]
   end
 
+  def self.skip_subdivision(c)
+    case c
+      when "TW","HK","MO"
+        "CN"
+      when "AX"
+        "FI"
+      when "BL","GF","GP","MF","MQ","NC","PF","PM","RE","TF","WF","YT"
+        "FR"
+      when "AW","BQ","CW","SX"
+        "NL"
+      when "SJ"
+        "NO"
+      when "AS","GU","MP","PR","UM","VI"
+        "US"
+      else
+        c
+    end
+  end
+
   def self.eurozone
     ["AT", "BE", "CY", "EE", "FI", "FR", "DE", "ES", "GR", "IE", "IT", "LU", "MT", "NL", "PT", "SI", "SK",
      "AD", "MC", "SM", "VA", "ME"]
