@@ -384,7 +384,18 @@
       :tax_rate: 5.5
       :tax_treatment: :special
       :tax_scope: :limited
-  GE: 
+  MC:
+    :default:
+      :tax_rate: 20.0
+    :book:
+      :tax_rate: 5.5
+      :tax_treatment: :special
+      :tax_scope: :limited
+    :ebook:
+      :tax_rate: 5.5
+      :tax_treatment: :default
+      :tax_scope: :na
+  GE:
     :default: 
       :tax_rate: 18.0
     :book: 
