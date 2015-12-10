@@ -167,12 +167,6 @@ module ImHelpers
       doc.search(".//em").each do |e|
         e.swap "<i>#{e.inner_html}</i>"
       end
-      doc.search(".//div").each do |e|
-        e.swap "#{e.inner_html}<br/>"
-      end
-      doc.search(".//p").each do |e|
-        e.swap "#{e.inner_html}<br/>"
-      end
 
       doc.search(".//ul").each do |e|
         e.swap "#{e.inner_html}"
@@ -181,7 +175,7 @@ module ImHelpers
         e.swap "#{e.inner_html}"
       end
       doc.search(".//li").each do |e|
-        e.swap "#{e.inner_html}<br>"
+        e.swap "<p>#{e.inner_html}</p>"
       end
       doc.search(".//span").each do |e|
         e.swap "#{e.inner_html}"
