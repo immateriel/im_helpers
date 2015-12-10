@@ -181,7 +181,7 @@ module ImHelpers
         e.swap "#{e.inner_html}"
       end
 
-      doc.to_xml(:encoding => "UTF-8")
+      doc.to_xml(:encoding => "UTF-8").gsub(/\n/," ").gsub(/\s+/," ")
     end
 
     def strip_html_links
