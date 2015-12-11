@@ -141,7 +141,7 @@ module Territories
   end
 
   def self.currencies_all
-    Country.all.map { |c| Country.new(c.last) }.map { |c| c.currency }.compact.map { |c| c.code }.uniq
+    Country.all.map { |c| c.currency }.compact.map { |c| c.code }.uniq
   end
 
   # see http://www.vatlive.com
