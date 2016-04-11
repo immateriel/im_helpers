@@ -216,32 +216,30 @@ module Territories
 
   # private
   def self.simplify(slist, tk, tklist)
-    list=[]
-    if slist.include?(tk)
-      list=((slist - [tk]) + tklist).uniq
-    else
-      list=slist.uniq
-    end
+    list = slist.uniq - ["WORLD", "DEFAULT"]
+    tklist = tklist.sort - ["WORLD", "DEFAULT"]
 
-    if list.sort == tklist.sort
-      list=[tk]
+    if list.sort == tklist
+      list = [tk]
+    else
+      list -= [tk]
     end
     list.uniq
   end
 
-  def self.simplifier(slist, default=nil, currency=nil)
-    list=Territories.simplify(slist, "WORLD", Territories.world)
+  def self.simplifier(slist, default = nil, currency = nil)
+    list = Territories.simplify(slist, "WORLD", Territories.world)
 
     unless default.blank?
-      countries_for_currency=Territories.world
+      countries_for_currency = Territories.world
       if currency
-        countries_for_currency=Territories.countries_with_currency_fallback(currency, "EUR")
+        countries_for_currency = Territories.countries_with_currency_fallback(currency, "EUR")
       end
-      pub_countries=Territories.exploder(default) & countries_for_currency
+      pub_countries = Territories.exploder(default) & countries_for_currency
       unless pub_countries.blank?
-        list=Territories.simplify(list, "DEFAULT", pub_countries)
+        list = Territories.simplify(list, "DEFAULT", pub_countries)
       end
-      list=Territories.simplify(list, "DEFAULT", default)
+      list = Territories.simplify(list, "DEFAULT", default)
     end
 
     list
