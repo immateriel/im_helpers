@@ -4,17 +4,15 @@ require 'im_helpers/ext/string'
 require 'im_helpers/ext/number'
 require 'im_helpers/ext/date'
 
+require 'countries'
 require 'rubygems'
-require 'test/unit'
+require 'minitest/autorun'
 require 'shoulda'
 
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 
-class Test::Unit::TestCase
-end
-
-class TestImOnix < Test::Unit::TestCase
+class TestImOnix < Minitest::Test
   context "extensions" do
     setup do
     end
