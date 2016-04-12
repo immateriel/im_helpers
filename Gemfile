@@ -12,4 +12,5 @@ group :development do
   gem "htmlentities"
   gem "unidecoder"
   gem "unicode"
+  gem 'countries'
 end

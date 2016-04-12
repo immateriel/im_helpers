@@ -71,4 +71,13 @@ class TerritoriesTest < Minitest::Test
 
     assert_equal (ImHelpers::Territories.eurozone + ["AE", "CV"]).sort, ImHelpers::Territories.simplifier(country_list, territory_list, currency)
   end
+  
+  def test_currency
+    assert_equal "EUR", ImHelpers::Territories.currency_for_country("FR")
+  end
+
+  def test_country_with_currency
+    assert_equal ["CA"], ImHelpers::Territories.countries_with_currency("CAD")
+  end
+  
 end

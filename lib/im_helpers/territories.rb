@@ -112,7 +112,7 @@ module Territories
   end
 
   def self.currency_for_country(country)
-    ct= Country.find_country_by_alpha2(country)
+    ct = ISO3166::Country.find_country_by_alpha2(country)
     if ct and ct.currency
       ct.currency.code
     else
@@ -129,7 +129,7 @@ module Territories
   end
 
   def self.countries_with_currency(currency)
-    Country.find_all_by_currency(currency).map { |country| country.first }.compact
+    ISO3166::Country.find_all_by_currency(currency).map { |country| country.first }.compact
   end
 
   def self.countries_with_currency_fallback(currency, default_currency="EUR")
@@ -141,7 +141,7 @@ module Territories
   end
 
   def self.currencies_all
-    Country.all.map { |c| c.currency }.compact.map { |c| c.code }.uniq
+    ISO3166::Country.all.map { |c| c.currency }.compact.map { |c| c.code }.uniq
   end
 
   # see http://www.vatlive.com
