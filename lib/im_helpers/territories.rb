@@ -179,19 +179,32 @@ module Territories
 
   # private
   def self.explode(str)
-    list=[]
-    slist=str.split(" ")
-    slist.each do |s|
-      case s
-        when /^\-/
-          list-=self.explode_token(s.gsub(/\-/, ""))
-        when /^\&/
-          list=list & self.explode_token(s.gsub(/\&/, ""))
-        else
-          list+=self.explode_token(s)
-      end
+    list = []
+
+    territories = str.partition(' - ').first
+      
+    territories = territories.partition(' & ').first if territories.include?("&")
+    territories = territories.split(" ")
+    
+    added = str.partition(' & ').last
+    added = added.partition(' - ').first if added.include?("-")
+    added = added.split(" ")
+    
+    excluded = str.partition(' - ').last
+    excluded = excluded.partition(' & ').first if excluded.include?("&")
+    excluded = excluded.split(" ")
+    
+    territories.each do |territory|
+      list += self.explode_token(territory)
     end
-    list.uniq
+    excluded.each do |territory|
+      list -= self.explode_token(territory)
+    end
+    added.each do |territory|
+      list += self.explode_token(territory)
+    end
+    
+    list.uniq.sort
   end
 
   # private
@@ -216,12 +229,13 @@ module Territories
 
   # private
   def self.simplify(slist, tk, tklist)
-    list = slist.uniq - ["WORLD", "DEFAULT"]
-    tklist = tklist.sort - ["WORLD", "DEFAULT"]
+    list = slist.uniq.sort
 
     if list.sort == tklist
       list = [tk]
-    else
+    elsif ((tklist - list).length + 1) < list.length && (tklist - list).length > 0
+      list = [ tk + " - " + (tklist - list).sort.join(" ")]
+    elsif list.length > 1
       list -= [tk]
     end
     list.uniq
@@ -239,8 +253,11 @@ module Territories
       unless pub_countries.blank?
         list = Territories.simplify(list, "DEFAULT", pub_countries)
       end
-      list = Territories.simplify(list, "DEFAULT", default)
+      list = Territories.simplify(list, "DEFAULT", Territories.exploder(default))
     end
+
+    # if DEFAULT and WORLD are equal and world is sent, use world instead of default
+    list = ["WORLD"] if slist.include?("WORLD") && list == ["DEFAULT"]
 
     list
   end
@@ -268,11 +285,11 @@ module Territories
 
     # on explose les raccourcis en liste complete
     def all_territory_list
-      if self.territory_list.include?("WORLD")
-        Territories.world
-      else
-        self.territory_list
+      list = []
+      self.territory_list.each do |territory|
+        list << Territories.explode(territory)
       end
+      return list.uniq.flatten
     end
 
     def human_territories
