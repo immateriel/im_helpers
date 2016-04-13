@@ -179,31 +179,19 @@ module Territories
 
   # private
   def self.explode(str)
-    list = []
-
-    territories = str.partition(' - ').first
-      
-    territories = territories.partition(' & ').first if territories.include?("&")
-    territories = territories.split(" ")
+    list=[]
+    slist=str.split(" ")
+    slist.each do |s|
+      case s
+      when /^\-/
+        list -= self.explode_token(s.gsub(/\-/, ""))
+      when /^\&/
+        list += self.explode_token(s.gsub(/\&/, ""))
+      else
+        list += self.explode_token(s)
+      end
     
-    added = str.partition(' & ').last
-    added = added.partition(' - ').first if added.include?("-")
-    added = added.split(" ")
-    
-    excluded = str.partition(' - ').last
-    excluded = excluded.partition(' & ').first if excluded.include?("&")
-    excluded = excluded.split(" ")
-    
-    territories.each do |territory|
-      list += self.explode_token(territory)
     end
-    excluded.each do |territory|
-      list -= self.explode_token(territory)
-    end
-    added.each do |territory|
-      list += self.explode_token(territory)
-    end
-    
     list.uniq.sort
   end
 
@@ -234,7 +222,7 @@ module Territories
     if list.sort == tklist
       list = [tk]
     elsif ((tklist - list).length + 1) < list.length && (tklist - list).length > 0
-      list = [ tk + " - " + (tklist - list).sort.join(" ")]
+      list = [ tk + " -" + (tklist - list).sort.join(" -")]
     elsif list.length > 1
       list -= [tk]
     end
