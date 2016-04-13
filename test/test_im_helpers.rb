@@ -56,13 +56,5 @@ class TestImOnix < Minitest::Test
 
     end
 
-    should "currency for france" do
-      assert_equal "EUR",ImHelpers::Territories.currency_for_country("FR")
-    end
-
-    should "country with CAD" do
-      assert_equal ["CA"],ImHelpers::Territories.countries_with_currency("CAD")
-    end
-
   end
 end

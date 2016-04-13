@@ -112,7 +112,7 @@ module Territories
   end
 
   def self.currency_for_country(country)
-    ct= Country.find_country_by_alpha2(country)
+    ct = ISO3166::Country.find_country_by_alpha2(country)
     if ct and ct.currency
       ct.currency.code
     else
@@ -129,7 +129,7 @@ module Territories
   end
 
   def self.countries_with_currency(currency)
-    Country.find_all_by_currency(currency).map { |country| country.first }.compact
+    ISO3166::Country.find_all_by_currency(currency).map { |country| country.first }.compact
   end
 
   def self.countries_with_currency_fallback(currency, default_currency="EUR")
@@ -141,7 +141,7 @@ module Territories
   end
 
   def self.currencies_all
-    Country.all.map { |c| c.currency }.compact.map { |c| c.code }.uniq
+    ISO3166::Country.all.map { |c| c.currency }.compact.map { |c| c.code }.uniq
   end
 
   # see http://www.vatlive.com
@@ -183,15 +183,16 @@ module Territories
     slist=str.split(" ")
     slist.each do |s|
       case s
-        when /^\-/
-          list-=self.explode_token(s.gsub(/\-/, ""))
-        when /^\&/
-          list=list & self.explode_token(s.gsub(/\&/, ""))
-        else
-          list+=self.explode_token(s)
+      when /^\-/
+        list -= self.explode_token(s.gsub(/\-/, ""))
+      when /^\&/
+        list += self.explode_token(s.gsub(/\&/, ""))
+      else
+        list += self.explode_token(s)
       end
+    
     end
-    list.uniq
+    list.uniq.sort
   end
 
   # private
@@ -216,33 +217,35 @@ module Territories
 
   # private
   def self.simplify(slist, tk, tklist)
-    list=[]
-    if slist.include?(tk)
-      list=((slist - [tk]) + tklist).uniq
-    else
-      list=slist.uniq
-    end
+    list = slist.uniq.sort
 
-    if list.sort == tklist.sort
-      list=[tk]
+    if list.sort == tklist
+      list = [tk]
+    elsif ((tklist - list).length + 1) < list.length && (tklist - list).length > 0
+      list = [ tk + " -" + (tklist - list).sort.join(" -")]
+    elsif list.length > 1
+      list -= [tk]
     end
     list.uniq
   end
 
-  def self.simplifier(slist, default=nil, currency=nil)
-    list=Territories.simplify(slist, "WORLD", Territories.world)
+  def self.simplifier(slist, default = nil, currency = nil)
+    list = Territories.simplify(slist, "WORLD", Territories.world)
 
     unless default.blank?
-      countries_for_currency=Territories.world
+      countries_for_currency = Territories.world
       if currency
-        countries_for_currency=Territories.countries_with_currency_fallback(currency, "EUR")
+        countries_for_currency = Territories.countries_with_currency_fallback(currency, "EUR")
       end
-      pub_countries=Territories.exploder(default) & countries_for_currency
+      pub_countries = Territories.exploder(default) & countries_for_currency
       unless pub_countries.blank?
-        list=Territories.simplify(list, "DEFAULT", pub_countries)
+        list = Territories.simplify(list, "DEFAULT", pub_countries)
       end
-      list=Territories.simplify(list, "DEFAULT", default)
+      list = Territories.simplify(list, "DEFAULT", Territories.exploder(default))
     end
+
+    # if DEFAULT and WORLD are equal and world is sent, use world instead of default
+    list = ["WORLD"] if slist.include?("WORLD") && list == ["DEFAULT"]
 
     list
   end
@@ -270,11 +273,11 @@ module Territories
 
     # on explose les raccourcis en liste complete
     def all_territory_list
-      if self.territory_list.include?("WORLD")
-        Territories.world
-      else
-        self.territory_list
+      list = []
+      self.territory_list.each do |territory|
+        list << Territories.explode(territory)
       end
+      return list.uniq.flatten
     end
 
     def human_territories
