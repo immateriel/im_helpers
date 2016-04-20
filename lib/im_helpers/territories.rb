@@ -223,24 +223,20 @@ module ImHelpers
       else
         list = slist.uniq
       end
+
       list = [tk] if list.sort == tklist.sort
       list.uniq
     end
 
     def self.simplifier(slist, default = nil, currency = nil)
       list = Territories.simplify(slist, "WORLD", Territories.world)
-
       unless default.blank?
         countries_for_currency = Territories.world
         countries_for_currency = Territories.countries_with_currency_fallback(currency, "EUR") if currency
         pub_countries = Territories.exploder(default) & countries_for_currency
         list = Territories.simplify(list, "DEFAULT", pub_countries) unless pub_countries.blank?
-        list = Territories.simplify(list, "DEFAULT", Territories.exploder(default))
+        list = Territories.simplify(list, "DEFAULT", default)
       end
-
-      # if DEFAULT and WORLD are equal and world is sent, use world instead of default
-      list = ["WORLD"] if slist.include?("WORLD") && list == ["DEFAULT"]
-
       list
     end
 
@@ -266,11 +262,11 @@ module ImHelpers
 
       # on explose les raccourcis en liste complete
       def all_territory_list
-        list = []
-        self.territory_list.each do |territory|
-          list << Territories.explode(territory)
+        if self.territory_list.include?("WORLD")
+          Territories.world
+        else
+          self.territory_list
         end
-        return list.uniq.flatten
       end
 
       def human_territories
