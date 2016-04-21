@@ -1,7 +1,14 @@
 module ImHelpers
   module FloatMethods
-    def prec(x)
-      ("%.#{x}f" % self).to_f
+    if RUBY_VERSION < "1.9"
+      def prec(x)
+        precision = 10 ** x
+        (self * precision).round.to_f / precision
+      end
+    else
+      def prec(x)
+        self.round(x)
+      end
     end
 
     def to_s_prec(x)
