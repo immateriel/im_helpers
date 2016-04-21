@@ -26,7 +26,12 @@ class TestImOnix < Minitest::Test
     end
 
     should "prec float" do
-      assert_equal 1.23,1.23456789.prec(2)
+      assert_equal 1.23, 1.23456789.prec(2)
+    end
+
+    # Ce test ne passe pas avec `("%.#{x}f" % self).to_f`
+    should "prec float with .005" do
+      assert_equal 12.13, 12.125.prec(2)
     end
   end
 
