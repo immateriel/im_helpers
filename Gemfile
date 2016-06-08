@@ -13,4 +13,5 @@ group :development do
   gem "unidecoder"
   gem "unicode"
   gem 'countries'
+  gem 'levenshtein-ffi'
 end
