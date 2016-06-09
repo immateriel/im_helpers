@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib"]
   s.authors = ["julbouln"]
-  s.date = "2016-06-08"
+  s.date = "2016-06-09"
   s.description = "immat\u{e9}riel.fr helpers lib"
   s.email = "jboulnois@immateriel.fr"
   s.extra_rdoc_files = [
@@ -51,7 +51,6 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<htmlentities>, [">= 0"])
       s.add_development_dependency(%q<unidecoder>, [">= 0"])
       s.add_development_dependency(%q<unicode>, [">= 0"])
-      s.add_development_dependency(%q<countries>, [">= 0"])
       s.add_development_dependency(%q<levenshtein-ffi>, [">= 0"])
       s.add_runtime_dependency(%q<nokogiri>, [">= 0"])
       s.add_runtime_dependency(%q<htmlentities>, [">= 0"])
@@ -73,7 +72,6 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<htmlentities>, [">= 0"])
       s.add_dependency(%q<unidecoder>, [">= 0"])
       s.add_dependency(%q<unicode>, [">= 0"])
-      s.add_dependency(%q<countries>, [">= 0"])
       s.add_dependency(%q<levenshtein-ffi>, [">= 0"])
       s.add_dependency(%q<nokogiri>, [">= 0"])
       s.add_dependency(%q<htmlentities>, [">= 0"])
@@ -96,7 +94,6 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<htmlentities>, [">= 0"])
     s.add_dependency(%q<unidecoder>, [">= 0"])
     s.add_dependency(%q<unicode>, [">= 0"])
-    s.add_dependency(%q<countries>, [">= 0"])
     s.add_dependency(%q<levenshtein-ffi>, [">= 0"])
     s.add_dependency(%q<nokogiri>, [">= 0"])
     s.add_dependency(%q<htmlentities>, [">= 0"])

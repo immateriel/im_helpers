@@ -12,6 +12,5 @@ group :development do
   gem "htmlentities"
   gem "unidecoder"
   gem "unicode"
-  gem 'countries'
   gem 'levenshtein-ffi'
 end
