@@ -10,17 +10,6 @@ begin
     gem.authors = ["julbouln"]
     gem.files = Dir.glob('lib/**/*')
 
-    # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/  20 for additional settings
-    gem.add_dependency "nokogiri"
-    gem.add_dependency "htmlentities"
-    gem.add_dependency "unidecoder"
-    gem.add_dependency "html_truncator"
-    gem.add_dependency "iso-639"
-    gem.add_dependency "countries"
-    gem.add_dependency "currencies"
-    gem.add_dependency "activesupport"
-    gem.add_dependency "i18n"
-
   end
   Jeweler::GemcutterTasks.new
 
