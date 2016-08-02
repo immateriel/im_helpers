@@ -7,3 +7,7 @@ end
 class Fixnum
   include ImHelpers::FixnumMethods
 end
+
+class BigDecimal
+  include ImHelpers::FloatMethods
+end
