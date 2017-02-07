@@ -224,7 +224,7 @@ module ImHelpers
   module TranslationHelpers
     def t(args={})
       trkey=self.downcase.translit.gsub(/\./, "")
-      I18n.t trkey, args
+      I18n.t trkey, args, :default=>self
     end
 
     def routes_t
