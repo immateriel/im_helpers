@@ -31,6 +31,7 @@ module ImHelpers
       fn=self.filename(date)
       if !File.exists?(fn) or date > File.ctime(fn).to_date
         self.download(date)
+        @@parsed=nil
       end
       @@parsed||=Nokogiri::XML.parse(File.open(fn))
     end
