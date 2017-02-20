@@ -23,4 +23,16 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "bundler", "~> 1.14"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "minitest", "~> 5.0"
+
+  spec.add_dependency 'nokogiri', '< 1.6.6'
+  spec.add_dependency "iso-639", '~> 0.2.0'
+  spec.add_dependency "countries", '~> 1.2.0'
+  spec.add_dependency "currencies", '~> 0.4.0'
+  spec.add_dependency "htmlentities", '~> 4.3.0'
+  spec.add_dependency "html_truncator", "~> 0.4.0"
+  spec.add_dependency "unidecoder"
+  spec.add_dependency "unicode", "~> 0.4.0"
+  spec.add_dependency "levenshtein-ffi"
+  spec.add_dependency "activesupport", "~> 3.2.0"
+  spec.add_dependency "i18n", "~> 0.7.0"
 end
