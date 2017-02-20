@@ -68,7 +68,7 @@ module ImHelpers
     end
 
     def self.get(name)
-      init(File.dirname(__FILE__) + '/../../config/nam_dict.txt') unless File.exists?("/tmp/firstnames.pstore")
+      init(File.dirname(__FILE__) + '/../../config/nam_dict.txt') unless File.exist?("/tmp/firstnames.pstore")
       hash[Unicode.downcase(name)]
     end
 

@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib"]
   s.authors = ["julbouln"]
-  s.date = "2016-06-09"
+  s.date = "2017-02-20"
   s.description = "immat\u{e9}riel.fr helpers lib"
   s.email = "jboulnois@immateriel.fr"
   s.extra_rdoc_files = [
@@ -34,7 +34,7 @@ Gem::Specification.new do |s|
     "lib/im_helpers/territories.rb"
   ]
   s.homepage = "http://github.com/immateriel/im_helpers"
-  s.rubygems_version = "2.2.2"
+  s.rubygems_version = "2.4.8"
   s.summary = "immat\u{e9}riel.fr helpers lib"
 
   if s.respond_to? :specification_version then
@@ -42,32 +42,32 @@ Gem::Specification.new do |s|
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<nokogiri>, [">= 0"])
-      s.add_runtime_dependency(%q<iso-639>, [">= 0"])
-      s.add_runtime_dependency(%q<countries>, [">= 0"])
-      s.add_runtime_dependency(%q<currencies>, [">= 0"])
-      s.add_runtime_dependency(%q<htmlentities>, [">= 0"])
-      s.add_runtime_dependency(%q<html_truncator>, [">= 0"])
+      s.add_runtime_dependency(%q<iso-639>, ["~> 0.2.0"])
+      s.add_runtime_dependency(%q<countries>, ["~> 1.2.0"])
+      s.add_runtime_dependency(%q<currencies>, ["~> 0.4.0"])
+      s.add_runtime_dependency(%q<htmlentities>, ["~> 4.3.0"])
+      s.add_runtime_dependency(%q<html_truncator>, ["~> 0.4.0"])
       s.add_runtime_dependency(%q<unidecoder>, [">= 0"])
-      s.add_runtime_dependency(%q<unicode>, [">= 0"])
+      s.add_runtime_dependency(%q<unicode>, ["~> 0.4.0"])
       s.add_runtime_dependency(%q<levenshtein-ffi>, [">= 0"])
-      s.add_runtime_dependency(%q<activesupport>, [">= 0"])
-      s.add_runtime_dependency(%q<i18n>, [">= 0"])
+      s.add_runtime_dependency(%q<activesupport>, ["~> 3.2.0"])
+      s.add_runtime_dependency(%q<i18n>, ["~> 0.7.0"])
       s.add_development_dependency(%q<shoulda>, [">= 0"])
       s.add_development_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_development_dependency(%q<bundler>, [">= 0"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.8.4"])
     else
       s.add_dependency(%q<nokogiri>, [">= 0"])
-      s.add_dependency(%q<iso-639>, [">= 0"])
-      s.add_dependency(%q<countries>, [">= 0"])
-      s.add_dependency(%q<currencies>, [">= 0"])
-      s.add_dependency(%q<htmlentities>, [">= 0"])
-      s.add_dependency(%q<html_truncator>, [">= 0"])
+      s.add_dependency(%q<iso-639>, ["~> 0.2.0"])
+      s.add_dependency(%q<countries>, ["~> 1.2.0"])
+      s.add_dependency(%q<currencies>, ["~> 0.4.0"])
+      s.add_dependency(%q<htmlentities>, ["~> 4.3.0"])
+      s.add_dependency(%q<html_truncator>, ["~> 0.4.0"])
       s.add_dependency(%q<unidecoder>, [">= 0"])
-      s.add_dependency(%q<unicode>, [">= 0"])
+      s.add_dependency(%q<unicode>, ["~> 0.4.0"])
       s.add_dependency(%q<levenshtein-ffi>, [">= 0"])
-      s.add_dependency(%q<activesupport>, [">= 0"])
-      s.add_dependency(%q<i18n>, [">= 0"])
+      s.add_dependency(%q<activesupport>, ["~> 3.2.0"])
+      s.add_dependency(%q<i18n>, ["~> 0.7.0"])
       s.add_dependency(%q<shoulda>, [">= 0"])
       s.add_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_dependency(%q<bundler>, [">= 0"])
@@ -75,16 +75,16 @@ Gem::Specification.new do |s|
     end
   else
     s.add_dependency(%q<nokogiri>, [">= 0"])
-    s.add_dependency(%q<iso-639>, [">= 0"])
-    s.add_dependency(%q<countries>, [">= 0"])
-    s.add_dependency(%q<currencies>, [">= 0"])
-    s.add_dependency(%q<htmlentities>, [">= 0"])
-    s.add_dependency(%q<html_truncator>, [">= 0"])
+    s.add_dependency(%q<iso-639>, ["~> 0.2.0"])
+    s.add_dependency(%q<countries>, ["~> 1.2.0"])
+    s.add_dependency(%q<currencies>, ["~> 0.4.0"])
+    s.add_dependency(%q<htmlentities>, ["~> 4.3.0"])
+    s.add_dependency(%q<html_truncator>, ["~> 0.4.0"])
     s.add_dependency(%q<unidecoder>, [">= 0"])
-    s.add_dependency(%q<unicode>, [">= 0"])
+    s.add_dependency(%q<unicode>, ["~> 0.4.0"])
     s.add_dependency(%q<levenshtein-ffi>, [">= 0"])
-    s.add_dependency(%q<activesupport>, [">= 0"])
-    s.add_dependency(%q<i18n>, [">= 0"])
+    s.add_dependency(%q<activesupport>, ["~> 3.2.0"])
+    s.add_dependency(%q<i18n>, ["~> 0.7.0"])
     s.add_dependency(%q<shoulda>, [">= 0"])
     s.add_dependency(%q<rdoc>, ["~> 3.12"])
     s.add_dependency(%q<bundler>, [">= 0"])

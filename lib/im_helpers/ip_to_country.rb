@@ -13,7 +13,7 @@ module IpToCountry
     end
 
     def self.get(ip)
-      unless File.exists?("#{self.default_dir}/IpToCountry.csv")
+      unless File.exist?("#{self.default_dir}/IpToCountry.csv")
         self.download
       end
       unless File.exist?("#{self.default_dir}/packed-ip.dat")

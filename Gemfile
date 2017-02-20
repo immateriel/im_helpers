@@ -1,16 +1,16 @@
 source "http://rubygems.org"
 
-gem 'nokogiri'
-gem "iso-639"
-gem "countries"
-gem "currencies"
-gem "htmlentities"
-gem "html_truncator"
+gem "nokogiri"
+gem "iso-639", '~> 0.2.0'
+gem "countries", '~> 1.2.0', :require => 'countries/global'
+gem "currencies", '~> 0.4.0'
+gem "htmlentities", '~> 4.3.0'
+gem "html_truncator", "~> 0.4.0"
 gem "unidecoder"
-gem "unicode"
-gem 'levenshtein-ffi'
-gem 'activesupport'
-gem 'i18n'
+gem "unicode", "~> 0.4.0"
+gem "levenshtein-ffi"
+gem "activesupport", "~> 3.2.0"
+gem "i18n", "~> 0.7.0"
 
 group :development do
   gem "shoulda", ">= 0"
