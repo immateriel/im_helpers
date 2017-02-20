@@ -41,7 +41,7 @@ Gem::Specification.new do |s|
     s.specification_version = 4
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<nokogiri>, [">= 0"])
+      s.add_runtime_dependency(%q<nokogiri>, ["< 1.6.6"])
       s.add_runtime_dependency(%q<iso-639>, ["~> 0.2.0"])
       s.add_runtime_dependency(%q<countries>, ["~> 1.2.0"])
       s.add_runtime_dependency(%q<currencies>, ["~> 0.4.0"])
@@ -54,10 +54,10 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<i18n>, ["~> 0.7.0"])
       s.add_development_dependency(%q<shoulda>, [">= 0"])
       s.add_development_dependency(%q<rdoc>, ["~> 3.12"])
-      s.add_development_dependency(%q<bundler>, [">= 0"])
-      s.add_development_dependency(%q<jeweler>, ["~> 1.8.4"])
+      s.add_development_dependency(%q<bundler>, ["~> 1.10.0"])
+      s.add_development_dependency(%q<jeweler>, ["= 1.8.4"])
     else
-      s.add_dependency(%q<nokogiri>, [">= 0"])
+      s.add_dependency(%q<nokogiri>, ["< 1.6.6"])
       s.add_dependency(%q<iso-639>, ["~> 0.2.0"])
       s.add_dependency(%q<countries>, ["~> 1.2.0"])
       s.add_dependency(%q<currencies>, ["~> 0.4.0"])
@@ -70,11 +70,11 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<i18n>, ["~> 0.7.0"])
       s.add_dependency(%q<shoulda>, [">= 0"])
       s.add_dependency(%q<rdoc>, ["~> 3.12"])
-      s.add_dependency(%q<bundler>, [">= 0"])
-      s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
+      s.add_dependency(%q<bundler>, ["~> 1.10.0"])
+      s.add_dependency(%q<jeweler>, ["= 1.8.4"])
     end
   else
-    s.add_dependency(%q<nokogiri>, [">= 0"])
+    s.add_dependency(%q<nokogiri>, ["< 1.6.6"])
     s.add_dependency(%q<iso-639>, ["~> 0.2.0"])
     s.add_dependency(%q<countries>, ["~> 1.2.0"])
     s.add_dependency(%q<currencies>, ["~> 0.4.0"])
@@ -87,8 +87,8 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<i18n>, ["~> 0.7.0"])
     s.add_dependency(%q<shoulda>, [">= 0"])
     s.add_dependency(%q<rdoc>, ["~> 3.12"])
-    s.add_dependency(%q<bundler>, [">= 0"])
-    s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
+    s.add_dependency(%q<bundler>, ["~> 1.10.0"])
+    s.add_dependency(%q<jeweler>, ["= 1.8.4"])
   end
 end
 
