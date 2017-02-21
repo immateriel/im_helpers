@@ -36,13 +36,9 @@ module ImHelpers
       @@parsed||=Nokogiri::XML.parse(File.open(fn))
     end
 
-    def self.rate(from_currency,to_currency,date=nil)
+    def self.rate(from_currency,to_currency,date=Date.today)
       if date < Date.new(1999,1,6)
         return nil
-      end
-
-      if !date
-        date=Date.today
       end
 
       xml=self.parse(date)
@@ -61,8 +57,11 @@ module ImHelpers
 
       time_node=xml.root.at("Cube").at("Cube[@time='#{date_attr}']")
       while !time_node
-        ImLogger::Log.info binding, "no rate for #{date}, try #{date - 1.day}"
+        puts "no rate for #{date}, try #{date - 1.day}"
         date = date - 1.day
+        if date < Date.new(1999,1,6)
+          return nil
+        end
         date_attr=date.strftime("%Y-%m-%d")
 
         time_node=xml.root.at("Cube").at("Cube[@time='#{date_attr}']")

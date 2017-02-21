@@ -1,8 +1,6 @@
 # ImHelpers
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/im_helpers`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Misc immatériel.fr shared helpers.
 
 ## Installation
 
@@ -22,7 +20,31 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+### Forex
+Use European Central Bank data to get money exchange rate.
+To get current rate between USD and EUR:
+    
+    > ImHelpers::Forex.rate("USD","EUR")
+    => 0.942
+    
+To get rate between CAD and EUR at 2014-04-01 :
+    
+    > ImHelpers::Forex.rate("CAD","EUR",Date.new(2014,4,1))
+    => 0.6561
+    
+### IpToCountry
+Get country from IP using http://software77.net/geo-ip/ database.
+
+    > ImHelpers::IpToCountry.search("216.58.204.142")
+    => "US"
+    
+### NameExtractor
+Extract semantic from person name string.
+
+    > ImHelpers::NameExtractor.new("John Smith")
+    => John Smith<firstname:John,lastname:Smith,genres:[:male]> 
+    > ImHelpers::NameExtractor.new("Smith, John")
+    => John Smith,<firstname:John,lastname:Smith,,genres:[:male]>     
 
 ## Development
 
