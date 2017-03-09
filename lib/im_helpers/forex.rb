@@ -2,6 +2,9 @@ module ImHelpers
   require 'nokogiri'
   # quick FOREX from BCE, only support top 28 currencies
   class Forex
+    # frais de conversion des devises de 4.5%
+    BANK_FEES = 0.045
+
     @default_dir="/tmp"
     def self.default_dir
       @default_dir
@@ -81,6 +84,13 @@ module ImHelpers
         nil
       end
 
+    end
+
+    # On retient les frais de conversion des devises
+    def self.rate_with_fees(from_currency, to_currency, date=Date.today)
+      return 1.0 if from_currency == "EUR"
+      rate = self.rate(from_currency, to_currency, date)
+      (rate / (1 + BANK_FEES)).round(4) if rate
     end
 
   end
