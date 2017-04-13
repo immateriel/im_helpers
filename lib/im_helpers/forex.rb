@@ -60,7 +60,7 @@ module ImHelpers
 
       time_node=xml.root.at("Cube").at("Cube[@time='#{date_attr}']")
       while !time_node
-        puts "no rate for #{date}, try #{date - 1.day}"
+#        puts "no rate for #{date}, try #{date - 1.day}"
         date = date - 1.day
         if date < Date.new(1999,1,6)
           return nil
