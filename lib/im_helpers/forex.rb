@@ -32,7 +32,7 @@ module ImHelpers
 
     def self.parse(date=Date.today)
       fn=self.filename(date)
-      if !File.exist?(fn) or date > File.ctime(fn).to_date
+      if !File.exist?(fn) or date > File.mtime(fn).to_date
         self.download(date)
         @@parsed=nil
       end
