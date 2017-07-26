@@ -64,7 +64,15 @@ module ImHelpers
     end
 
     def self.european_union
-      ["AT", "BE", "BG", "HR", "CY", "CZ", "DK", "EE", "FI", "FR", "DE", "GR", "HU", "IE", "IT", "LV", "LT", "LU", "MT", "NL", "PL", "PT", "RO", "SK", "SI", "ES", "SE", "GB"]
+      ["AT", "BE", "BG", "HR", "CY", "CZ", "DK", "EE", "FI", "FR", "DE", "GR", "HU", "IE", "IT", "LV", "LT",
+       "LU", "MT", "NL", "PL", "PT", "RO", "SK", "SI", "ES", "SE", "GB"
+      ]
+    end
+
+    # european union extended territories to VAT
+    # https://ec.europa.eu/taxation_customs/business/vat/eu-vat-rules-topic/territorial-status-eu-countries-certain-territories_fr
+    def self.european_union_ext
+      self.european_union + ["MC","IM"]
     end
 
     def self.europe
@@ -105,6 +113,10 @@ module ImHelpers
 
     def self.is_country_in_european_union?(country)
       self.european_union.include?(country)
+    end
+
+    def self.is_country_in_european_union_ext?(country)
+      self.european_union_ext.include?(country)
     end
 
     def self.first_level_countries(countries)
