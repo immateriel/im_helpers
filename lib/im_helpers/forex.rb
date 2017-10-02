@@ -6,11 +6,12 @@ module ImHelpers
     BANK_FEES = 0.045
 
     @default_dir="/tmp"
+
     def self.default_dir
       @default_dir
     end
 
-    def self.default_dir=v
+    def self.default_dir= v
       @default_dir=v
     end
 
@@ -32,15 +33,16 @@ module ImHelpers
 
     def self.parse(date=Date.today)
       fn=self.filename(date)
-      if !File.exist?(fn) or date > File.mtime(fn).to_date
+      @parsed||={}
+      if !File.exist?(fn) or date > File.ctime(fn).to_date
         self.download(date)
-        @@parsed=nil
+        @parsed[fn]=nil
       end
-      @@parsed||=Nokogiri::XML.parse(File.open(fn))
+      @parsed[fn]||=Nokogiri::XML.parse(File.open(fn))
     end
 
-    def self.rate(from_currency,to_currency,date=Date.today)
-      if date < Date.new(1999,1,6)
+    def self.rate(from_currency, to_currency, date=Date.today)
+      if date < Date.new(1999, 1, 6)
         return nil
       end
 
@@ -56,34 +58,38 @@ module ImHelpers
         to_rate=1.0
       end
 
-      date_attr=date.strftime("%Y-%m-%d")
+      root_node = xml.root.at("Cube")
 
-      time_node=xml.root.at("Cube").at("Cube[@time='#{date_attr}']")
-      while !time_node
-#        puts "no rate for #{date}, try #{date - 1.day}"
-        date = date - 1.day
-        if date < Date.new(1999,1,6)
-          return nil
-        end
+      if xml.root and root_node
         date_attr=date.strftime("%Y-%m-%d")
+        time_node=root_node.at("Cube[@time='#{date_attr}']")
+        while time_node.nil?
+#          puts "no rate for #{date}, try #{date - 1.day}"
+          date = date - 1.day
+          if date < Date.new(1999, 1, 6)
+            return nil
+          end
+          date_attr=date.strftime("%Y-%m-%d")
+          time_node=root_node.at("Cube[@time='#{date_attr}']")
+        end
+        node=time_node.search("Cube[@currency='#{from_currency}']").first
+        if node
+          from_rate=node["rate"].to_f
+        end
+        node=time_node.search("Cube[@currency='#{to_currency}']").first
+        if node
+          to_rate=node["rate"].to_f
+        end
 
-        time_node=xml.root.at("Cube").at("Cube[@time='#{date_attr}']")
-      end
-      node=time_node.search("Cube[@currency='#{from_currency}']").first
-      if node
-        from_rate=node["rate"].to_f
-      end
-      node=time_node.search("Cube[@currency='#{to_currency}']").first
-      if node
-        to_rate=node["rate"].to_f
-      end
-
-      if to_rate and from_rate
-        ((to_rate/from_rate)*10000.0).round/10000.0
+        if to_rate and from_rate
+          ((to_rate/from_rate)*10000.0).round/10000.0
+        else
+          nil
+        end
       else
+        puts "Error parsing forex file"
         nil
       end
-
     end
 
     # On retient les frais de conversion des devises
