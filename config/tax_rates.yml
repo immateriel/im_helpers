@@ -789,17 +789,30 @@
       :tax_rate: 25.0
       :tax_treatment: :default
       :tax_scope: :na
-  CH: 
-    :default: 
-      :tax_rate: 8.0
-    :book: 
-      :tax_rate: 2.5
-      :tax_treatment: :special
-      :tax_scope: :limited
-    :ebook: 
-      :tax_rate: 8.0
-      :tax_treatment: :default
-      :tax_scope: :na
+  CH:
+    -
+     :default:
+       :tax_rate: 8.0
+     :book:
+       :tax_rate: 2.5
+       :tax_treatment: :special
+       :tax_scope: :limited
+     :ebook:
+       :tax_rate: 8.0
+       :tax_treatment: :default
+       :tax_scope: :na
+     :end_at: 2017-12-31
+    -
+     :default:
+       :tax_rate: 8.0
+     :book:
+       :tax_rate: 2.5
+       :tax_treatment: :special
+       :tax_scope: :limited
+     :ebook:
+       :tax_rate: 2.5
+       :tax_treatment: :default
+       :tax_scope: :na
   LI:
     :default:
       :tax_rate: 8.0
