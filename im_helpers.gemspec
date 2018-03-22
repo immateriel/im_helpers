@@ -33,6 +33,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency "unidecoder"
   spec.add_dependency "unicode", "~> 0.4.0"
   spec.add_dependency "levenshtein-ffi"
-  spec.add_dependency "activesupport", "~> 3.2.0"
-  spec.add_dependency "i18n", "~> 0.7.0"
+  spec.add_dependency "activesupport", ">= 3.2.0"
+  spec.add_dependency "i18n", ">= 0.7.0"
 end
