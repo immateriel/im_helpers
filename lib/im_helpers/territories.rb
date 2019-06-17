@@ -164,7 +164,10 @@ module ImHelpers
     end
 
     def self.country_ebook_vat_at_date(country,date)
-      self.country_tax_rates_at(country, date)[:ebook][:tax_rate]
+      rates = self.country_tax_rates_at(country, date)
+      if rates
+        rates[:ebook][:tax_rate]
+      end
     end
 
     # implicit "current"
