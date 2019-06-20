@@ -267,6 +267,18 @@
       :tax_rate: 25.0
       :tax_treatment: :default
       :tax_scope: :na
+    :end_at: 2018-12-31
+   -
+     :default:
+       :tax_rate: 25.0
+     :book:
+       :tax_rate: 0.0
+       :tax_treatment: :special
+       :tax_scope: :limited
+     :ebook:
+       :tax_rate: 5.0
+       :tax_treatment: :special
+       :tax_scope: :limited
   CY:
    -
     :default: 
@@ -855,16 +867,29 @@
       :tax_treatment: :special
       :tax_scope: :limited
   SE:
-    :default: 
-      :tax_rate: 25.0
-    :book: 
-      :tax_rate: 6.0
-      :tax_treatment: :special
-      :tax_scope: :all
-    :ebook: 
-      :tax_rate: 25.0
-      :tax_treatment: :default
-      :tax_scope: :na
+    -
+     :default:
+       :tax_rate: 25.0
+     :book:
+       :tax_rate: 6.0
+       :tax_treatment: :special
+       :tax_scope: :all
+     :ebook:
+       :tax_rate: 25.0
+       :tax_treatment: :default
+       :tax_scope: :na
+     :end_at: 2019-06-30
+    -
+      :default:
+        :tax_rate: 25.0
+      :book:
+        :tax_rate: 6.0
+        :tax_treatment: :special
+        :tax_scope: :all
+      :ebook:
+        :tax_rate: 6.0
+        :tax_treatment: :special
+        :tax_scope: :limited
   CH:
     -
      :default:
