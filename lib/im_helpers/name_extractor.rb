@@ -21,25 +21,24 @@ module ImHelpers
     end
 
     def self.parse_name_line(line)
-#    puts "eat #{line}"
       return if line.start_with?("#") or line.start_with?("=")
 
       parts = line.split(" ").select { |p| p.strip != "" }
       name = Unicode.downcase(parts[1])
 
       case parts[0]
-        when "M" then
-          set(name, :male)
-        when "1M", "?M" then
-          set(name, :mostly_male)
-        when "F" then
-          set(name, :female)
-        when "1F", "?F" then
-          set(name, :mostly_female)
-        when "?" then
-          set(name, :andy)
-        else
-          raise "Not sure what to do with a gender of #{parts[0]}"
+      when "M" then
+        set(name, :male)
+      when "1M", "?M" then
+        set(name, :mostly_male)
+      when "F" then
+        set(name, :female)
+      when "1F", "?F" then
+        set(name, :mostly_female)
+      when "?" then
+        set(name, :andy)
+      else
+        raise "Not sure what to do with a gender of #{parts[0]}"
       end
     end
 
@@ -54,17 +53,17 @@ module ImHelpers
 
     def self._hash
       @names = PStore.new("/tmp/firstnames.pstore")
-      h={}
+      h = {}
       @names.transaction(true) {
         @names.roots.each do |k|
-          h[k]=@names[k]
+          h[k] = @names[k]
         end
       }
       h
     end
 
     def self.hash
-      @hash||=_hash
+      @hash ||= _hash
     end
 
     def self.get(name)
@@ -76,9 +75,9 @@ module ImHelpers
 
   class NameExtractor
     def initialize(name)
-      @lastnames=[]
-      @firstnames=[]
-      @genres=[]
+      @lastnames = []
+      @firstnames = []
+      @genres = []
       @orig_name = name
       parse
     end
@@ -133,46 +132,46 @@ module ImHelpers
 
 # 0 == exact match, 1 == completely different
     def compare(other)
-      score=0.0
-      firstname_dist=Levenshtein.distance(normalized_firstname, other.normalized_firstname)
-      lastname_dist=Levenshtein.distance(normalized_lastname, other.normalized_lastname)
+      score = 0.0
+      firstname_dist = Levenshtein.distance(normalized_firstname, other.normalized_firstname)
+      lastname_dist = Levenshtein.distance(normalized_lastname, other.normalized_lastname)
 
-      mod=1.0
+      mod = 1.0
       if lastname_found?
         if normalized_firstname[0] == other.normalized_firstname[0]
-          mod+=3.0
+          mod += 3.0
           if normalized_firstname.length < 3 or other.normalized_firstname.length < 3
-            mod+=3.0
+            mod += 3.0
           end
           if lastname_dist == 0
-            mod+=4.0
+            mod += 4.0
           end
         end
       end
 
-
       if normalized_firstname.length > 0 and other.normalized_firstname.length > 0
-        score += 0.25 * (firstname_dist/(normalized_firstname.length.to_f) + firstname_dist/(other.normalized_firstname.length.to_f))/mod
+        score += 0.25 * (firstname_dist / (normalized_firstname.length.to_f) + firstname_dist / (other.normalized_firstname.length.to_f)) / mod
       end
       if normalized_lastname.length > 0 and other.normalized_lastname.length > 0
-        score += 0.25 * (lastname_dist/(normalized_lastname.length.to_f) + lastname_dist/(other.normalized_lastname.length.to_f))
+        score += 0.25 * (lastname_dist / (normalized_lastname.length.to_f) + lastname_dist / (other.normalized_lastname.length.to_f))
       end
 
       score
     end
 
     private
+
     def parse
-      names=@orig_name.scan(/[^\s.]+\.?/)
+      names = @orig_name.scan(/[^\s.]+\.?/)
 
       names.each do |name|
-        res=FirstNameHash.get(name)
+        res = FirstNameHash.get(name)
         unless res
-          res=FirstNameHash.get(name.to_ascii)
+          res = FirstNameHash.get(name.to_ascii)
         end
-        if res or Unicode.downcase(name)=~/^[a-z]\.?$/
+        if res or Unicode.downcase(name) =~ /^[a-z]\.?$/
           if res
-            @genres+=res
+            @genres += res
           end
           @firstnames << name
         else
