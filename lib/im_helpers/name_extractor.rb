@@ -10,17 +10,17 @@ module ImHelpers
   class FirstNameHash
 
     def self.set(name, gender, countries)
-      if name.to_ascii != name
-        set name.to_ascii, gender, countries
-      end
+#      if name.to_ascii != name
+#        set name.to_ascii, gender, countries
+#      end
 
       if name.include? "+"
         ['', '-', ' '].each { |replacement|
           set name.gsub("+", replacement), gender, countries
         }
       else
-          @names[name] ||= []
-          @names[name] << {gender: gender, countries: countries}
+        @names[name] ||= []
+        @names[name] << {gender: gender, countries: countries}
       end
     end
 
@@ -114,6 +114,7 @@ module ImHelpers
 
   class NameExtractor
     attr_accessor :genres, :countries
+
     def initialize(name)
       @lastnames = []
       @firstnames = []
