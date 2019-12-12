@@ -44,8 +44,9 @@ module ImHelpers
 
     def self.init(fname)
       @names = PStore.new("/tmp/firstnames.pstore")
+      file = File.open(fname)
       @names.transaction do
-        File.foreach(fname, :encoding => "iso8859-1:utf-8") do |line|
+        File.foreach(fname) do |line|
           parse_name_line line
         end
       end
