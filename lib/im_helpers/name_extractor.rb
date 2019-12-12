@@ -3,17 +3,69 @@ require 'unicode'
 require 'unidecoder'
 require 'pstore'
 require 'levenshtein'
+require 'csv'
 require 'pp'
 
 module ImHelpers
 
+  class FirstNameConverter
+
+    def self.max
+      10000
+    end
+
+    def self.convert
+      names = {}
+      File.foreach("config/nam_dict.txt") do |line|
+        if !line.start_with?("#") and !line.start_with?("=")
+          nm = Unicode.downcase(line[3..28].strip)
+          freq = line[30..85].split('').map { |f| f == "" ? 0 : f.to_i }.inject(0) { |sum, i| sum + i }
+          names[nm] ||= 0
+          names[nm] += freq * 1000
+          if names[nm] > self.max
+            names[nm] = self.max
+          end
+        end
+      end
+
+      # Insee
+      CSV.open("config/nat2018.csv", col_sep: ";").each do |r|
+        nm = Unicode.downcase(r[1])
+        freq = r[3].to_i * 100
+        names[nm] ||= 0
+        names[nm] += freq
+        if names[nm] > self.max
+          names[nm] = self.max
+        end
+      end
+
+      # https://github.com/philipperemy/name-dataset
+      File.foreach("config/firstnames.all.txt") do |line|
+        nm = Unicode.downcase(line.strip)
+        names[nm] ||= 0
+        names[nm] += 1000
+        if names[nm] > self.max
+          names[nm] = self.max
+        end
+      end
+
+      # extra
+      ["carian"].each do |n|
+        names[n] ||= 0
+        names[n] += 2500
+      end
+
+      File.open("config/firstnames.txt", "w") do |f|
+        names.each do |nm, freq|
+          f.write("#{nm},#{freq}\n")
+        end
+      end
+
+    end
+  end
+
   class FirstNameHash
-
     def self.set(name, gender, countries)
-#      if name.to_ascii != name
-#        set name.to_ascii, gender, countries
-#      end
-
       if name.include? "+"
         ['', '-', ' '].each { |replacement|
           set name.gsub("+", replacement), gender, countries
@@ -21,72 +73,6 @@ module ImHelpers
       else
         @names[name] ||= []
         @names[name] << {gender: gender, countries: countries}
-      end
-    end
-
-    def self.countries
-      {"GB" => 0, "IE" => 1, "US" => 2, "IT" => 3, "MT" => 4, "PT" => 5, "ES" => 6,
-       "FR" => 7, "BE" => 8, "LU" => 9, "NL" => 10, "IGNORE0" => 11, "DE" => 12, "AT" => 13,
-       "CH" => 14, "IS" => 15, "DK" => 16, "NO" => 17, "SE" => 18, "FI" => 19, "EE" => 20,
-       "LV" => 21, "LT" => 22, "PL" => 23, "CZ" => 24, "SK" => 25, "HU" => 26, "RO" => 27,
-       "BG" => 28, "BA" => 29, "HR" => 30, "IGNORE1" => 31, "MK" => 32, "ME" => 33, "RS" => 34,
-       "SI" => 35, "AL" => 36, "GR" => 37, "RU" => 38, "BY" => 39, "MD" => 40, "UA" => 41,
-       "AM" => 42, "AZ" => 43, "GE" => 44, "KZ" => 45, "TR" => 46, "IR" => 47, "IL" => 48,
-       "CN" => 49, "IN" => 50, "JP" => 51, "KR" => 52, "VN" => 53, "OTHER" => 54
-      }
-    end
-
-    def self._rev_countries
-      h = {}
-      self.countries.each do |country, col|
-        h[col] = country
-      end
-      h
-    end
-
-    def self.rev_countries
-      @rev_countries ||= self._rev_countries
-    end
-
-    def self.parse_name_line(line)
-      return if line.start_with?("#") or line.start_with?("=")
-
-      genre_k = line[0..2].strip
-      name = Unicode.downcase(line[3..28].strip)
-      countries_freq = line[30..85].split('')
-      countries = []
-      countries_freq.each_with_index do |cf, i|
-        if cf.to_i > 0
-          countries << self.rev_countries[i]
-        end
-      end
-
-      genre = nil
-      case genre_k
-      when "M" then
-        genre = :male
-      when "1M", "?M" then
-        genre = :mostly_male
-      when "F" then
-        genre = :female
-      when "1F", "?F" then
-        genre = :mostly_female
-      when "?" then
-        genre = :andy
-      else
-        raise "Not sure what to do with a gender of #{parts[0]}"
-      end
-
-      set(name, genre, countries)
-
-    end
-
-    def self.init(fname)
-      @names = PStore.new("/tmp/firstnames.pstore")
-      @names.transaction do
-        File.foreach(fname) do |line|
-          parse_name_line line
-        end
       end
     end
 
@@ -106,20 +92,32 @@ module ImHelpers
     end
 
     def self.get(name)
-      init(File.dirname(__FILE__) + '/../../config/nam_dict.txt') unless File.exist?("/tmp/firstnames.pstore")
+      self.init unless File.exist?("/tmp/firstnames.pstore")
       hash[Unicode.downcase(name)]
+    end
+
+    def self.init
+      fname = (File.dirname(__FILE__) + '/../../config/firstnames.txt')
+      @names = PStore.new("/tmp/firstnames.pstore")
+      @names.transaction do
+        File.foreach(fname) do |line|
+          nm, freq = line.strip.split(",")
+          @names[nm] ||= freq.to_i
+        end
+      end
     end
 
   end
 
   class NameExtractor
-    attr_accessor :genres, :countries
+    def self.hash_class
+      FirstNameHash
+    end
 
     def initialize(name)
       @lastnames = []
       @firstnames = []
-      @genres = []
-      @countries = []
+      @results = []
       @orig_name = name
       parse
     end
@@ -164,8 +162,12 @@ module ImHelpers
       compare(other) < 0.15
     end
 
+    def results
+      @results
+    end
+
     def inspect
-      "#{to_s}<firstname:#{firstname_found? ? firstname : "?"},lastname:#{lastname_found? ? lastname : "?"},genres:#{firstname_found? ? genres : "?"},countries:#{firstname_found? ? countries : "?"}>"
+      "#{to_s}<firstname:#{firstname_found? ? firstname : "?"},lastname:#{lastname_found? ? lastname : "?"},results:#{results}>"
     end
 
 # 0 == exact match, 1 == completely different
@@ -202,19 +204,45 @@ module ImHelpers
     def parse
       names = @orig_name.scan(/[^\s.]+\.?/)
 
-      names.each do |name|
-        res = FirstNameHash.get(name)
-        unless res
-          res = FirstNameHash.get(name.to_ascii)
-        end
-        if res or Unicode.downcase(name) =~ /^[a-z]\.?$/
-          if res
-            @genres << res.first[:gender]
-            @countries += res.first[:countries]
+      med = 0
+      if names.length < 4 # fail with more than 4 names
+        names.each_with_index do |name, i|
+          res = NameExtractor.hash_class.get(name)
+          unless res
+            res = NameExtractor.hash_class.get(name.to_ascii)
           end
-          @firstnames << name
-        else
-          @lastnames << name
+          if res or Unicode.downcase(name) =~ /^-?[a-z]\.?$/ or Unicode.downcase(name) =~ /^dr\.?/
+            if res
+              freq = (res * (names.length - i) / names.length.to_f).round
+              if name.length == 2
+                freq-=2000
+              end
+              @results << {name: name, freq: freq}
+              med+=freq
+            else
+              @results << {name: name, freq: 5000}
+              med+=5000
+            end
+          else
+            @results << {name: name, freq: ((names.length - i).to_f*500).round}
+          end
+        end
+
+        med = (med / results.length.to_f).round
+        if med > 1000 # not sure enough
+          if @results.length == 2
+            max = [@results.first[:freq],@results.last[:freq]].max
+            min = [@results.first[:freq],@results.last[:freq]].min
+            return if max < 2*min # firstname should have 2x freq than lastname
+          end
+          @results.each do |result|
+
+            if result[:freq] >= med*2/3.to_f
+              @firstnames << result[:name]
+            else
+              @lastnames << result[:name]
+            end
+          end
         end
       end
     end
