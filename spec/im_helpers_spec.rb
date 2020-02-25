@@ -9,6 +9,7 @@ describe ImHelpers do
   describe "extensions" do
     it "escapes exclamations points" do
       expect("Ce qui se passe à Vegas reste à Vegas!".escape_sphinx_query).to eq("Ce qui se passe à Vegas reste à Vegas\!")
+      expect("Coucou !".escape_sphinx_query).to eq("Coucou \!")
     end
 
     it "escapes at characters" do
@@ -51,7 +52,6 @@ describe ImHelpers do
       e = ImHelpers::NameExtractor.new("René Barjavel")
       expect(e.firstname).to eq("René")
       expect(e.lastname).to eq("Barjavel")
-      expect(e.genres.include?(:male)).to eq(true)
 
       e = ImHelpers::NameExtractor.new("J. R. R. Tolkien")
       expect(e.firstname).to eq("J. R. R.")
@@ -65,16 +65,6 @@ describe ImHelpers do
       expect(e1).to eq(e2)
       expect(e1).to eq(e3)
       expect(e2).to eq(e3)
-
-      e1 = ImHelpers::NameExtractor.new("Pierre Loti")
-      e2 = ImHelpers::NameExtractor.new("P Loti")
-      expect(e1).to eq(e2)
-
-      e1 = ImHelpers::NameExtractor.new("Guy de Maupassant")
-      e2 = ImHelpers::NameExtractor.new("G de Maupassant")
-      e3 = ImHelpers::NameExtractor.new("G Maupassant")
-      expect(e1).to eq(e2)
-      expect(e1).to eq(e3)
     end
 
     it "should be different" do
@@ -98,4 +88,5 @@ describe ImHelpers do
       expect(ImHelpers::Language.find("fre").native_name).to eq("Français")
     end
   end
+
 end
