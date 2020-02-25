@@ -23,28 +23,28 @@ Or install it yourself as:
 ### Forex
 Use European Central Bank data to get money exchange rate.
 To get current rate between USD and EUR:
-    
+
     > ImHelpers::Forex.rate("USD","EUR")
     => 0.942
-    
+
 To get rate between CAD and EUR at 2014-04-01 :
-    
+
     > ImHelpers::Forex.rate("CAD","EUR",Date.new(2014,4,1))
     => 0.6561
-    
+
 ### IpToCountry
 Get country from IP using http://software77.net/geo-ip/ database.
 
     > ImHelpers::IpToCountry.search("216.58.204.142")
     => "US"
-    
+
 ### NameExtractor
 Extract semantic from person name string.
 
     > ImHelpers::NameExtractor.new("John Smith")
-    => John Smith<firstname:John,lastname:Smith,genres:[:male]> 
+    => John Smith<firstname:John,lastname:Smith>
     > ImHelpers::NameExtractor.new("Smith, John")
-    => John Smith,<firstname:John,lastname:Smith,,genres:[:male]>     
+    => John Smith,<firstname:John,lastname:Smith]>
 
 ## Development
 
