@@ -8,9 +8,9 @@ module ImHelpers
     PARTICLES = %w{d de des du l la le les von}
 
     def escape_sphinx_query
-      key_value_pairs = [[/@/, "\\@"], [/~/, "\\~"], [/\//, "\\/"], [/\s([-])+\s*/, " \\-"], [/\!/, " \\!"], [/\?/, " \\?"]]
+      key_value_pairs = [[/@/, '\@'], [/~/, '\~'], [/\//, '\/'], [/\s([-])+\s*/, ' \-'], [/\!/, '\!'], [/\?/, '\?'], [/\(/, '\('], [/\)/, '\)'], [/\"/, '\"'], [/\'/, '\'']]
       regexp_fragments = key_value_pairs.collect { |k,v| k }
-      self.gsub(Regexp.union(*regexp_fragments)) do |match|
+      self.gsub!(Regexp.union(*regexp_fragments)) do |match|
         key_value_pairs.detect{|k,v| k =~ match}[1]
       end
       self.delete!('"') if self.count('"') % 2 != 0
