@@ -205,7 +205,7 @@ module ImHelpers
       names = @orig_name.scan(/[^\s.]+\.?/)
 
       med = 0
-      if names.length < 4 # fail with more than 4 names
+      if names.length < 5 # fail with more than 4 names
         names.each_with_index do |name, i|
           res = NameExtractor.hash_class.get(name)
           unless res
@@ -245,6 +245,12 @@ module ImHelpers
           end
         end
       end
+
+      # fallback
+      if @firstnames.length == 0 and @lastnames.length == 0
+        @lastnames = [@orig_name]
+      end
+
     end
   end
 end

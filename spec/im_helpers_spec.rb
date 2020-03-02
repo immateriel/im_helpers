@@ -8,12 +8,12 @@ require 'countries'
 describe ImHelpers do
   describe "extensions" do
     it "escapes exclamations points" do
-      expect("Ce qui se passe à Vegas reste à Vegas!".escape_sphinx_query).to eq("Ce qui se passe à Vegas reste à Vegas\!")
-      expect("Coucou !".escape_sphinx_query).to eq("Coucou \!")
+      expect("Ce qui se passe à Vegas reste à Vegas!".escape_sphinx_query).to eq("Ce qui se passe à Vegas reste à Vegas\\!")
+      expect("Coucou !".escape_sphinx_query).to eq("Coucou \\!")
     end
 
     it "escapes at characters" do
-      expect("jean@dupont.com".escape_sphinx_query).to eq("jean\@dupont.com")
+      expect("jean@dupont.com".escape_sphinx_query).to eq("jean\\@dupont.com")
     end
 
     it "strips html" do
@@ -53,9 +53,25 @@ describe ImHelpers do
       expect(e.firstname).to eq("René")
       expect(e.lastname).to eq("Barjavel")
 
+      e = ImHelpers::NameExtractor.new("D.R. Burrow")
+      expect(e.firstname).to eq("D. R.")
+      expect(e.lastname).to eq("Burrow")
+
       e = ImHelpers::NameExtractor.new("J. R. R. Tolkien")
       expect(e.firstname).to eq("J. R. R.")
       expect(e.lastname).to eq("Tolkien")
+
+      e = ImHelpers::NameExtractor.new("Jean de la Fontaine")
+      expect(e.firstname).to eq("Jean de")
+      expect(e.lastname).to eq("la Fontaine")
+    end
+
+    it 'founds firstname or lastname' do
+      e = ImHelpers::NameExtractor.new("alexandre@dumas.fr")
+      expect(e.lastname).to eq("alexandre@dumas.fr")
+
+      e = ImHelpers::NameExtractor.new("Sarah Agnès L.")
+      expect(e.firstname).to eq("Sarah Agnès L.")
     end
 
     it 'should be equal' do
