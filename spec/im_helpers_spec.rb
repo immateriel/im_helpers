@@ -61,13 +61,18 @@ describe ImHelpers do
       expect(e.firstname).to eq("J. R. R.")
       expect(e.lastname).to eq("Tolkien")
 
+      e = ImHelpers::NameExtractor.new("Jean de la Fontaine")
+      expect(e.firstname).to eq("Jean")
+      expect(e.lastname).to eq("de la Fontaine")
+
       e = ImHelpers::NameExtractor.new("J-François Unique")
       expect(e.firstname).to eq("J-François")
       expect(e.lastname).to eq("Unique")
 
-      e = ImHelpers::NameExtractor.new("Jean de la Fontaine")
-      expect(e.firstname).to eq("Jean")
-      expect(e.lastname).to eq("de la Fontaine")
+      e = ImHelpers::NameExtractor.new("Elisabeth Monteiro Rodrigues")
+      expect(e.firstname).to eq("Elisabeth")
+      expect(e.lastname).to eq("Monteiro Rodrigues")
+
     end
 
     it 'founds firstname or lastname' do
@@ -75,7 +80,8 @@ describe ImHelpers do
       expect(e.lastname).to eq("alexandre@dumas.fr")
 
       e = ImHelpers::NameExtractor.new("Sarah Agnès L.")
-      expect(e.firstname).to eq("Sarah Agnès L.")
+      expect(e.firstname).to eq("Sarah Agnès")
+      expect(e.lastname).to eq("L.")
     end
 
     it 'should be equal' do

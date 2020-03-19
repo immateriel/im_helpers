@@ -207,40 +207,49 @@ module ImHelpers
       med = 0
       if names.length < 5 # fail with more than 4 names
         names.each_with_index do |name, i|
-          res = NameExtractor.hash_class.get(name)
-          unless res
-            res = NameExtractor.hash_class.get(name.to_ascii)
-          end
-          if res or Unicode.downcase(name) =~ /^-?[a-z]\.?$/ or Unicode.downcase(name) =~ /^dr\.?/
-            if res
-              freq = (res * (names.length - i) / names.length.to_f).round
-              if name.length == 2
-                freq-=2000
-              end
-              @results << {name: name, freq: freq}
-              med+=freq
-            else
-              @results << {name: name, freq: 5000}
-              med+=5000
+          splitted_names = name.split("-")
+          if splitted_names.length > 0
+            res = splitted_names.map { |nm| NameExtractor.hash_class.get(nm) }.compact.inject(0) { |sum, x| sum + x } / splitted_names.length
+            unless res
+              res = splitted_names.map { |nm| NameExtractor.hash_class.get(nm.to_ascii) }.compact.inject(0) { |sum, x| sum + x } / splitted_names.length
             end
-          else
-            @results << {name: name, freq: ((names.length - i).to_f*500).round}
+            if res
+              if Unicode.downcase(name) =~ /^-?[a-z]\.?$/ or Unicode.downcase(name) =~ /^dr\.?/
+                @results << {name: name, freq: 4000}
+                med += 4000
+              else
+                freq = (res * (names.length - i) / names.length.to_f).round
+                if name.length == 2 # only two char
+                  freq -= 2000
+                end
+                if name[0] =~ /[a-z]/ # downcase first char
+                  freq -= 2000
+                end
+                @results << {name: name, freq: freq}
+                med += freq
+              end
+            else
+              @results << {name: name, freq: ((names.length - i).to_f * 500).round}
+            end
           end
         end
 
-        med = (med / results.length.to_f).round
-        if med > 1000 # not sure enough
-          if @results.length == 2
-            max = [@results.first[:freq],@results.last[:freq]].max
-            min = [@results.first[:freq],@results.last[:freq]].min
-            return if max < 2*min # firstname should have 2x freq than lastname
-          end
-          @results.each do |result|
-
-            if result[:freq] >= med*2/3.to_f
-              @firstnames << result[:name]
-            else
-              @lastnames << result[:name]
+        if results.length > 0
+          med = (med / results.length.to_f).round
+          if med > 1000 # not sure enough
+            if @results.length == 2
+              max = [@results.first[:freq], @results.last[:freq]].max
+              min = [@results.first[:freq], @results.last[:freq]].min
+              return if max < 2 * min # firstname should have 2x freq than lastname
+            end
+            @results.each_with_index do |result, i|
+              fact = med * (i / @results.length.to_f) * 2.0
+#            puts "#{result} > #{fact}"
+              if result[:freq] > fact
+                @firstnames << result[:name]
+              else
+                @lastnames << result[:name]
+              end
             end
           end
         end
