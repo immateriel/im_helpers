@@ -119,7 +119,13 @@ module ImHelpers
       @firstnames = []
       @results = []
       @orig_name = name
+
       parse
+
+      # fallback
+      if @firstnames.length == 0 and @lastnames.length == 0
+        @lastnames = [@orig_name]
+      end
     end
 
     def firstname
@@ -254,12 +260,6 @@ module ImHelpers
           end
         end
       end
-
-      # fallback
-      if @firstnames.length == 0 and @lastnames.length == 0
-        @lastnames = [@orig_name]
-      end
-
     end
   end
 end
