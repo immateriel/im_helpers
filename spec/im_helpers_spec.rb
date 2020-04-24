@@ -73,6 +73,9 @@ describe ImHelpers do
       expect(e.firstname).to eq("Elisabeth")
       expect(e.lastname).to eq("Monteiro Rodrigues")
 
+      e = ImHelpers::NameExtractor.new("G R")
+      expect(e.firstname).to eq("")
+      expect(e.lastname).to eq("G R")
     end
 
     it 'founds firstname or lastname' do
