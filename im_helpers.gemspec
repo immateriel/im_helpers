@@ -26,7 +26,8 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'nokogiri', '~> 1.9.0'
   spec.add_dependency "iso-639", '~> 0.2.0'
-  spec.add_dependency "countries", '~> 1.2.0'
+  spec.add_dependency "money", "~> 6.9"
+  spec.add_dependency "countries", '~> 3.0.0'
   spec.add_dependency "currencies", '~> 0.4.0'
   spec.add_dependency "htmlentities", '~> 4.3.0'
   spec.add_dependency "html_truncator", "~> 0.4.0"
