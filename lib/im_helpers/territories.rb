@@ -126,7 +126,7 @@ module ImHelpers
     def self.currency_for_country(country)
       ct = ISO3166::Country.find_country_by_alpha2(country)
       if ct and ct.currency
-        ct.currency.code
+        ct.currency.iso_code
       else
         nil
       end
@@ -153,7 +153,7 @@ module ImHelpers
     end
 
     def self.currencies_all
-      ISO3166::Country.all.map { |c| c.currency }.compact.map { |c| c.code }.uniq
+      ISO3166::Country.all.map { |c| c.currency }.compact.map { |c| c.iso_code }.uniq
     end
 
     # see http://www.vatlive.com
