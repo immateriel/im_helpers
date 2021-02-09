@@ -20,7 +20,7 @@ module ImHelpers
     end
   end
 
-  module FixnumMethods
+  module IntegerMethods
     def to_s_prec(x)
       "%.#{x}f" % self
     end

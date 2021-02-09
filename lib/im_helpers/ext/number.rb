@@ -4,8 +4,8 @@ class Float
   include ImHelpers::FloatMethods
 end
 
-class Fixnum
-  include ImHelpers::FixnumMethods
+class Integer
+  include ImHelpers::IntegerMethods
 end
 
 class BigDecimal
