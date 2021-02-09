@@ -27,7 +27,7 @@ module ImHelpers
     end
 
     def cut_utf8(p, l) # (index) position, length
-      raise(ArgumentError, "Error: argument is not Fixnum", caller) if p.class != Fixnum or l.class != Fixnum
+      raise(ArgumentError, "Error: argument is not Integer", caller) if p.class != Integer or l.class != Integer
       s = self.length_utf8
       #if p < 0 then p = s - p.abs end
       if p < 0 then
