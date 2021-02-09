@@ -27,7 +27,7 @@ module ImHelpers
     end
 
     def cut_utf8(p, l) # (index) position, length
-      raise(ArgumentError, "Error: argument is not Integer", caller) if p.class != Integer or l.class != Integer
+      raise(ArgumentError, "Error: argument is not Integer", caller) unless p.is_a?(Integer) && l.is_a?(Integer)
       s = self.length_utf8
       #if p < 0 then p = s - p.abs end
       if p < 0 then
