@@ -1,3 +1,5 @@
+ISO3166.configuration.enable_currency_extension!
+
 module ImHelpers
   module Territories
     def self.included(klass)

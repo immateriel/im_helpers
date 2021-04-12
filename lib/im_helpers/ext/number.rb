@@ -4,7 +4,7 @@ class Float
   include ImHelpers::FloatMethods
 end
 
-class Fixnum
+class Integer
   include ImHelpers::FixnumMethods
 end
 
