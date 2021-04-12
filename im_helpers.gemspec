@@ -21,14 +21,15 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_development_dependency "bundler", "~> 1.14"
-  spec.add_development_dependency "rake", "~> 10.0"
+  spec.add_development_dependency "rake", "~> 11.0"
   spec.add_development_dependency "rspec"
 
-  spec.add_dependency 'nokogiri', '~> 1.9.0'
+  spec.add_dependency 'nokogiri'
   spec.add_dependency "iso-639", '~> 0.2.0'
   spec.add_dependency "money", "~> 6.9"
   spec.add_dependency "countries", '~> 3.0.0'
   spec.add_dependency "currencies", '~> 0.4.0'
+
   spec.add_dependency "htmlentities", '~> 4.3.0'
   spec.add_dependency "html_truncator", "~> 0.4.0"
   spec.add_dependency "unidecoder"
