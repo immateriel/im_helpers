@@ -5,7 +5,7 @@ class Float
 end
 
 class Integer
-  include ImHelpers::FixnumMethods
+  include ImHelpers::IntegerMethods
 end
 
 class BigDecimal
