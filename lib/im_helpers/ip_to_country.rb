@@ -23,7 +23,7 @@ module IpToCountry
     end
 
     def self.download
-      system("wget software77.net/geo-ip/?DL=1 -O #{self.default_dir}/IpToCountry.csv.tmp.gz")
+      system("wget -q software77.net/geo-ip/?DL=1 -O #{self.default_dir}/IpToCountry.csv.tmp.gz")
       system("gunzip #{self.default_dir}/IpToCountry.csv.tmp.gz")
       system("mv #{self.default_dir}/IpToCountry.csv.tmp #{self.default_dir}/IpToCountry.csv")
     end

@@ -25,9 +25,9 @@ module ImHelpers
 
     def self.download(date=Date.today)
       if date < Date.today
-        system("wget http://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist.xml -O #{self.filename(date)}")
+        system("wget -q http://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist.xml -O #{self.filename(date)}")
       else
-        system("wget http://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml -O #{self.filename(date)}")
+        system("wget -q http://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml -O #{self.filename(date)}")
       end
     end
 
