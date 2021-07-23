@@ -233,6 +233,16 @@ module ImHelpers
           self.europe
         when "EUZ"
           self.eurozone
+        when "NAM"
+          self.north_america
+        when "SAM"
+          self.south_america
+        when "AFR"
+          self.africa
+        when "OCEANIA"
+          self.oceania
+        when "ASIA"
+          self.asia
         else
           [tk]
       end
