@@ -116,7 +116,7 @@ module ImHelpers
       ["DZ", "AO", "BW", "BI", "CM", "CV", "CF", "TD", "KM", "YT", "CG", "CD", "BJ", "GQ", "ET", "ER", "DJ", "GA",
        "GM", "GH", "GN", "CI", "KE", "LS", "LR", "LY", "MG", "MW", "ML", "MR", "MU", "MA", "MZ", "NA", "NE", "NG",
        "GW", "RW", "SH", "ST", "SN", "SC", "SL", "SO", "ZA", "ZW", "EH", "SD", "SZ", "TG", "TN", "UG", "EG", "TZ",
-       "BF", "ZM"]
+       "BF", "ZM", "SS"]
     end
 
     def self.currencies
