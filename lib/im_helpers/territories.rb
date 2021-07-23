@@ -89,7 +89,7 @@ module ImHelpers
     end
 
     def self.south_america
-      ["AR", "BO", "BR", "CL", "CO", "EC", "FK", "GF", "GY", "GY", "PY", "PE", "SR", "UY", "VE"]
+      ["AR", "BO", "BR", "CL", "CO", "EC", "FK", "GF", "GY", "GY", "PY", "PE", "SR", "UY", "VE", "BQ"]
     end
 
     def self.outremer
