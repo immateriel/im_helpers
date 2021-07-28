@@ -1,12 +1,14 @@
 require 'im_helpers'
 
 RSpec.describe ImHelpers::IpToCountry do
+  let!(:default_dir){ ImHelpers::IpToCountry.default_dir }
+
   describe 'get ip-country database' do
     it "should download the file and process it into a DAT file" do
       ImHelpers::IpToCountry.get('216.58.204.142')
 
-      expect(File).to exist("./ip_to_country_data/IpToCountry.csv")
-      expect(File).to exist("./ip_to_country_data/packed-ip.dat")
+      expect(File).to exist("#{default_dir}/IpToCountry.csv")
+      expect(File).to exist("#{default_dir}/packed-ip.dat")
     end
   end
 
