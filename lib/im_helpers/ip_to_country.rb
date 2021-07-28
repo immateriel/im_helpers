@@ -66,7 +66,20 @@ module IpToCountry
       end
     end
 
+    def self.data_is_outdated?
+      #making sure that the data is never older than a month (plus a few days to account for an eventual delay from the provider)
+      csv_date = File.mtime( "#{self.default_dir}/IpToCountry.csv").to_date
+      (Date.today - csv_date).to_i > 34
+    end
+
     def self.search(ip)
+      if File.exist?("#{self.default_dir}/IpToCountry.csv")
+        if self.data_is_outdated?
+          self.download
+          self.packing
+        end
+      end
+
       # the binary table file is looked up with each request
       File.open("#{self.default_dir}/packed-ip.dat","rb") do |rfile|
         rfile.seek(0,IO::SEEK_END)
