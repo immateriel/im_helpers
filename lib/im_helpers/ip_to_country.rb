@@ -66,15 +66,23 @@ module IpToCountry
       end
     end
 
-    def self.data_is_outdated?
-      #making sure that the data is never older than a month (plus a few days to account for an eventual delay from the provider)
+    def self.csv_is_outdated?
       csv_date = File.mtime( "#{self.default_dir}/IpToCountry.csv").to_date
-      (Date.today - csv_date).to_i > 34
+      (Date.today - csv_date).to_i > 40 # number of days until we consider the CSV file outdated
+    end
+
+    def self.dat_is_outdated?
+      csv_date = File.mtime( "#{self.default_dir}/packed-ip.dat").to_date
+      (Date.today - csv_date).to_i > 30 # number of days between each data regeneration attempt when the CSV is outdated
+    end
+
+    def self.should_refetch_data?
+      self.csv_is_outdated? && self.dat_is_outdated?
     end
 
     def self.search(ip)
       if File.exist?("#{self.default_dir}/IpToCountry.csv")
-        if self.data_is_outdated?
+        if self.should_refetch_data?
           self.download
           self.packing
         end

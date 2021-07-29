@@ -15,17 +15,32 @@ RSpec.describe ImHelpers::IpToCountry do
     end
   end
 
-
-  describe "no outdated CSV data file" do
-    it "should not have a data file older than one month" do
-      FileUtils.touch "#{default_dir}/IpToCountry.csv", :mtime => Time.now - 35.days
-      expect(ImHelpers::IpToCountry.data_is_outdated?).to eq(true)
+  describe "refetch and regenerate data files" do
+    it "should not try to refetch the CSV it is outdated but has already been refetched recently" do
+      FileUtils.touch "#{default_dir}/IpToCountry.csv", :mtime => Time.now - 41.days
+      FileUtils.touch "#{default_dir}/packed-ip.dat", :mtime => Time.now - 15.days
+      expect(ImHelpers::IpToCountry.csv_is_outdated?).to eq(true)
+      expect(ImHelpers::IpToCountry.dat_is_outdated?).to eq(false)
+      expect(ImHelpers::IpToCountry.should_refetch_data?).to eq(false)
 
       ImHelpers::IpToCountry.search('102.129.65.255')
-      expect(ImHelpers::IpToCountry.data_is_outdated?).to eq(false)
+      expect(ImHelpers::IpToCountry.dat_is_outdated?).to eq(false)
+      expect(ImHelpers::IpToCountry.should_refetch_data?).to eq(false)
     end
 
+    it "should refetch and regenerate data if both CSV and DAT files are old" do
+      FileUtils.touch "#{default_dir}/IpToCountry.csv", :mtime => Time.now - 41.days
+      FileUtils.touch "#{default_dir}/packed-ip.dat", :mtime => Time.now - 31.days
+      expect(ImHelpers::IpToCountry.csv_is_outdated?).to eq(true)
+      expect(ImHelpers::IpToCountry.dat_is_outdated?).to eq(true)
+      expect(ImHelpers::IpToCountry.should_refetch_data?).to eq(true)
+
+      ImHelpers::IpToCountry.search('102.129.65.255')
+      expect(ImHelpers::IpToCountry.dat_is_outdated?).to eq(false)
+      expect(ImHelpers::IpToCountry.should_refetch_data?).to eq(false)
+    end
   end
+
   describe 'search country by IP' do
     it "should return the right country for a given IP address" do
       expect(ImHelpers::IpToCountry.search('102.129.65.255')).to eq('FR')
