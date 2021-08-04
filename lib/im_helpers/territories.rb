@@ -80,7 +80,7 @@ module ImHelpers
     def self.europe
       ["AL", "AD", "AM", "AT", "BY", "BE", "BA", "BG", "CH", "CY", "CZ", "DE", "DK", "EE", "ES", "FO", "FI", "FR",
        "GB", "GE", "GI", "GR", "HU", "HR", "IE", "IS", "IT", "LT", "LU", "LV", "MC", "MK", "MT", "NO", "NL", "PL",
-       "PT", "RO", "RU", "SE", "SI", "SK", "SM", "TR", "UA", "VA"]
+       "PT", "RO", "RU", "SE", "SI", "SK", "SM", "TR", "UA", "VA", "LI", "MD", "ME", "RS"]
     end
 
     def self.francophonie
@@ -89,7 +89,7 @@ module ImHelpers
     end
 
     def self.south_america
-      ["AR", "BO", "BR", "CL", "CO", "EC", "FK", "GF", "GY", "GY", "PY", "PE", "SR", "UY", "VE"]
+      ["AR", "BO", "BR", "CL", "CO", "EC", "FK", "GF", "GY", "GY", "PY", "PE", "SR", "UY", "VE", "BQ"]
     end
 
     def self.outremer
@@ -116,7 +116,7 @@ module ImHelpers
       ["DZ", "AO", "BW", "BI", "CM", "CV", "CF", "TD", "KM", "YT", "CG", "CD", "BJ", "GQ", "ET", "ER", "DJ", "GA",
        "GM", "GH", "GN", "CI", "KE", "LS", "LR", "LY", "MG", "MW", "ML", "MR", "MU", "MA", "MZ", "NA", "NE", "NG",
        "GW", "RW", "SH", "ST", "SN", "SC", "SL", "SO", "ZA", "ZW", "EH", "SD", "SZ", "TG", "TN", "UG", "EG", "TZ",
-       "BF", "ZM"]
+       "BF", "ZM", "SS"]
     end
 
     def self.currencies
@@ -162,6 +162,17 @@ module ImHelpers
       else
         self.countries_with_currency(currency)
       end
+    end
+
+    def self.countries_with_currency_fallback_by_continents(currency, default_currency="EUR")
+      continents = ["europe", "africa", "asia", "oceania", "north_america", "south_america"]
+      countries = self.countries_with_currency_fallback(currency, default_currency)
+      territories_list = {}
+      continents.each do |continent|
+        continent_countries = (self.send(continent) & countries).map{|territory_string| { string: territory_string, name: self.human_territories(territory_string).first } }
+        territories_list[continent] = continent_countries unless continent_countries.empty?
+      end
+      return territories_list
     end
 
     def self.currencies_all
@@ -233,6 +244,16 @@ module ImHelpers
           self.europe
         when "EUZ"
           self.eurozone
+        when "NAM"
+          self.north_america
+        when "SAM"
+          self.south_america
+        when "AFR"
+          self.africa
+        when "OCEANIA"
+          self.oceania
+        when "ASIA"
+          self.asia
         else
           [tk]
       end
