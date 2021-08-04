@@ -164,6 +164,17 @@ module ImHelpers
       end
     end
 
+    def self.countries_with_currency_fallback_by_continents(currency, default_currency="EUR")
+      continents = ["europe", "africa", "asia", "oceania", "north_america", "south_america"]
+      countries = self.countries_with_currency_fallback(currency, default_currency)
+      territories_list = {}
+      continents.each do |continent|
+        continent_countries = (self.send(continent) & countries).map{|territory_string| { string: territory_string, name: self.human_territories(territory_string).first } }
+        territories_list[continent] = continent_countries unless continent_countries.empty?
+      end
+      return territories_list
+    end
+
     def self.currencies_all
       ISO3166::Country.all.map { |c| c.currency }.compact.map { |c| c.iso_code }.uniq
     end
