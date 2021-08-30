@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 # Country detection from IP address
-# http://software77.net/geo-ip/
+# https://lite.ip2location.com/database/ip-country
 module ImHelpers
 module IpToCountry
     @default_dir="/tmp"
@@ -23,9 +23,12 @@ module IpToCountry
     end
 
     def self.download
-      system("wget -q software77.net/geo-ip/?DL=1 -O #{self.default_dir}/IpToCountry.csv.tmp.gz")
-      system("gunzip #{self.default_dir}/IpToCountry.csv.tmp.gz")
-      system("mv #{self.default_dir}/IpToCountry.csv.tmp #{self.default_dir}/IpToCountry.csv")
+      system("wget -q download.ip2location.com/lite/IP2LOCATION-LITE-DB1.CSV.ZIP -O #{self.default_dir}/IpToCountry.zip")
+      system("unzip -qo #{self.default_dir}/IpToCountry.zip -d #{self.default_dir}")
+      system("mv #{self.default_dir}/IP2LOCATION-LITE-DB1.CSV #{self.default_dir}/IpToCountry.csv")
+      system("rm #{self.default_dir}/README_LITE.TXT")
+      system("rm #{self.default_dir}/LICENSE-CC-BY-SA-4.0.TXT")
+      system("rm #{self.default_dir}/IpToCountry.zip")
     end
 
     def self.update
@@ -39,8 +42,8 @@ module IpToCountry
       last_country=nil
       File.open("#{self.default_dir}/packed-ip.dat","wb") do |wfile|
         IO.foreach("#{self.default_dir}/IpToCountry.csv", :encoding => "ISO-8859-1") do |line|
-          next if !(line =~ /^"/ )
-          s,e,d1,d2,co=line.delete!("\"").split(",")
+          next if (!(line =~ /^"/ ) || line =~ /-/)
+          s,e,co=line.delete!("\"").split(",").slice(0,3)
           s,e = s.to_i,e.to_i
           if !last_start
             # initialize with first entry
@@ -63,7 +66,28 @@ module IpToCountry
       end
     end
 
+    def self.csv_is_outdated?
+      csv_date = File.mtime( "#{self.default_dir}/IpToCountry.csv").to_date
+      (Date.today - csv_date).to_i > 40 # number of days until we consider the CSV file outdated
+    end
+
+    def self.dat_is_outdated?
+      csv_date = File.mtime( "#{self.default_dir}/packed-ip.dat").to_date
+      (Date.today - csv_date).to_i > 30 # number of days between each data regeneration attempt when the CSV is outdated
+    end
+
+    def self.should_refetch_data?
+      self.csv_is_outdated? && self.dat_is_outdated?
+    end
+
     def self.search(ip)
+      if File.exist?("#{self.default_dir}/IpToCountry.csv")
+        if self.should_refetch_data?
+          self.download
+          self.packing
+        end
+      end
+
       # the binary table file is looked up with each request
       File.open("#{self.default_dir}/packed-ip.dat","rb") do |rfile|
         rfile.seek(0,IO::SEEK_END)
