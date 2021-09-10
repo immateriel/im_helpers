@@ -103,9 +103,9 @@ module ImHelpers
     end
 
     def self.asia
-      ["AF", "AM", "AZ", "BH", "BD", "BT", "BN", "KH", "CN", "CY", "GE", "IN", "ID", "IR", "IQ", "IL", "JP",
+      ["AF", "AZ", "BH", "BD", "BT", "BN", "KH", "CN", "IN", "ID", "IR", "IQ", "IL", "JP",
        "JO", "KZ", "KP", "KR", "KW", "KG", "LA", "LB", "MO", "MY", "MV", "MN", "MM", "NP", "OM", "PK", "PS", "PH",
-       "QA", "SA", "SG", "LK", "SY", "TW", "TJ", "TH", "TL", "TR", "TM", "AE", "UZ", "VN", "YE"]
+       "QA", "SA", "SG", "LK", "SY", "TW", "TJ", "TH", "TL", "TM", "AE", "UZ", "VN", "YE"]
     end
     
     def self.oceania
