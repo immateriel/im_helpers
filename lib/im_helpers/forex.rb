@@ -31,12 +31,24 @@ module ImHelpers
       end
     end
 
+    def self.refresh_file?(fn, date)
+      !File.exist?(fn) || (date > File.ctime(fn).to_date) || File.empty?(fn)
+    end
+
     def self.parse(date=Date.today)
       fn=self.filename(date)
       @parsed||={}
-      if !File.exist?(fn) or date > File.ctime(fn).to_date
-        self.download(date)
-        @parsed[fn]=nil
+      if self.refresh_file?(fn, date)
+        retries = 0
+        begin
+          self.download(date)
+          raise if self.refresh_file?(fn, date)
+        rescue
+          retry if (retries += 1) < 3
+          raise "Could not download Forex file"
+        ensure
+          @parsed[fn]=nil
+        end
       end
       @parsed[fn]||=Nokogiri::XML.parse(File.open(fn))
     end
@@ -58,9 +70,11 @@ module ImHelpers
         to_rate=1.0
       end
 
+      raise "Error parsing Forex file ; Download failed ?" unless xml.root
+
       root_node = xml.root.at("Cube")
 
-      if xml.root and root_node
+      if root_node
         date_attr=date.strftime("%Y-%m-%d")
         time_node=root_node.at("Cube[@time='#{date_attr}']")
         while time_node.nil?
@@ -86,9 +100,6 @@ module ImHelpers
         else
           nil
         end
-      else
-        puts "Error parsing forex file"
-        nil
       end
     end
 
