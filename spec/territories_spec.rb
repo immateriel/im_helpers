@@ -95,6 +95,11 @@ describe ImHelpers::Territories do
       expect(rate).not_to eq(nil)
     end
 
+    it "group world countries by continent" do
+      territories_list = ImHelpers::Territories.countries_with_currency_fallback_by_continents("EUR")
+      expect(territories_list.values.flatten.length).to eq(ImHelpers::Territories.world.count)
+    end
+
   end
 
 end

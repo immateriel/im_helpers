@@ -119,6 +119,10 @@ module ImHelpers
        "BF", "ZM", "SS"]
     end
 
+    def self.antarctic
+      ["TF"]
+    end
+
     def self.currencies
       ["USD", "CAD", "GBP", "AUD", "CHF", "DKK", "NOK", "SEK", "KRW", "ZAR", "BRL", "SGD", "MXN", "NZD", "JPY", "EUR"]
     end
@@ -165,7 +169,7 @@ module ImHelpers
     end
 
     def self.countries_with_currency_fallback_by_continents(currency, default_currency="EUR")
-      continents = ["europe", "africa", "asia", "oceania", "north_america", "south_america"]
+      continents = ["europe", "africa", "asia", "oceania", "north_america", "south_america", "antarctic"]
       countries = self.countries_with_currency_fallback(currency, default_currency)
       territories_list = {}
       continents.each do |continent|
