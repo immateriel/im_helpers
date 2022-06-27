@@ -32,6 +32,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "htmlentities", '~> 4.3.0'
   spec.add_dependency "html_truncator", "~> 0.4.0"
+  spec.add_dependency "unidecoder"
   spec.add_dependency "unicode", "~> 0.4.0"
   spec.add_dependency "levenshtein-ffi"
   spec.add_dependency "activesupport", ">= 3.2.0"

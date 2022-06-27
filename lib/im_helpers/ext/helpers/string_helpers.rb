@@ -1,5 +1,6 @@
 # -*- encoding : utf-8 -*-
 require "htmlentities"
+require 'unidecoder'
 
 module ImHelpers
 
@@ -98,7 +99,7 @@ module ImHelpers
 
     def translit
       begin
-        I18n.transliterate(self)
+        self.to_ascii
       rescue
         # if there is a problem, remove chars
         self.to_s.encode("ascii", :invalid => :replace, :undef => :replace, :replace => "")

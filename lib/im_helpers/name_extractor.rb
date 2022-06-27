@@ -1,5 +1,6 @@
 require 'benchmark'
 require 'unicode'
+require 'unidecoder'
 require 'pstore'
 require 'levenshtein'
 require 'csv'
@@ -140,15 +141,15 @@ module ImHelpers
     end
 
     def normalized
-      I18n.transliterate(Unicode.downcase(to_s))
+      Unicode.downcase(to_s).to_ascii
     end
 
     def normalized_firstname
-      I18n.transliterate(Unicode.downcase(firstname))
+      Unicode.downcase(firstname).to_ascii
     end
 
     def normalized_lastname
-      I18n.transliterate(Unicode.downcase(lastname))
+      Unicode.downcase(lastname).to_ascii
     end
 
     def firstname_found?
@@ -216,7 +217,7 @@ module ImHelpers
           if splitted_names.length > 0
             res = splitted_names.map { |nm| NameExtractor.hash_class.get(nm) }.compact.inject(0) { |sum, x| sum + x } / splitted_names.length
             unless res
-              res = splitted_names.map { |nm| NameExtractor.hash_class.get(I18n.transliterate(nm)) }.compact.inject(0) { |sum, x| sum + x } / splitted_names.length
+              res = splitted_names.map { |nm| NameExtractor.hash_class.get(nm.to_ascii) }.compact.inject(0) { |sum, x| sum + x } / splitted_names.length
             end
             if res
               if Unicode.downcase(name) =~ /^-?[a-z]\.?$/ or Unicode.downcase(name) =~ /^dr\.?/
