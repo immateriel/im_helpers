@@ -140,15 +140,15 @@ module ImHelpers
     end
 
     def normalized
-      I18n.transliterate(Unicode.downcase(to_s))
+      I18n.transliterate(Unicode.downcase(to_s), :locale => :en)
     end
 
     def normalized_firstname
-      I18n.transliterate(Unicode.downcase(firstname))
+      I18n.transliterate(Unicode.downcase(firstname), :locale => :en)
     end
 
     def normalized_lastname
-      I18n.transliterate(Unicode.downcase(lastname))
+      I18n.transliterate(Unicode.downcase(lastname), :locale => :en)
     end
 
     def firstname_found?
@@ -216,7 +216,7 @@ module ImHelpers
           if splitted_names.length > 0
             res = splitted_names.map { |nm| NameExtractor.hash_class.get(nm) }.compact.inject(0) { |sum, x| sum + x } / splitted_names.length
             unless res
-              res = splitted_names.map { |nm| NameExtractor.hash_class.get(I18n.transliterate(nm)) }.compact.inject(0) { |sum, x| sum + x } / splitted_names.length
+              res = splitted_names.map { |nm| NameExtractor.hash_class.get(I18n.transliterate(nm, :locale => :en)) }.compact.inject(0) { |sum, x| sum + x } / splitted_names.length
             end
             if res
               if Unicode.downcase(name) =~ /^-?[a-z]\.?$/ or Unicode.downcase(name) =~ /^dr\.?/
