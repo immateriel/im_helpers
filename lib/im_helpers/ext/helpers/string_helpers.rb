@@ -98,7 +98,7 @@ module ImHelpers
 
     def translit
       begin
-        I18n.transliterate(self)
+        I18n.transliterate(self, :locale => :en)
       rescue
         # if there is a problem, remove chars
         self.to_s.encode("ascii", :invalid => :replace, :undef => :replace, :replace => "")
