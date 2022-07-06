@@ -1,0 +1,31 @@
+---
+name: CI
+on: [pull_request, workflow_dispatch]
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        gemfiles: [rails5, rails6]
+        rubies: [2.4, 2.5, 2.6, 2.7, '3.0']
+        exclude:
+          - rubies: '3.0'
+            gemfiles: rails5
+          - rubies: 2.4
+            gemfiles: rails6
+    runs-on: ubuntu-latest
+
+    # $BUNDLE_GEMFILE must be set at the job level, so it is set for all steps
+    env:
+      BUNDLE_GEMFILE: .github/gemfiles/${{ matrix.gemfiles }}.gemfile
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.rubies }}
+          bundler: '1.17.3'
+          # runs 'bundle install' and caches installed gems automatically
+          bundler-cache: true
+
+      - run: bundle exec rspec || bundle exec rspec
