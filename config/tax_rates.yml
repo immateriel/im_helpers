@@ -1010,16 +1010,29 @@
       :tax_treatment: :exempt
       :tax_scope: :limited
   GB:
-    :default:
-      :tax_rate: 20.0
-    :book:
-      :tax_rate: 0.0
-      :tax_treatment: :special
-      :tax_scope: :all
-    :ebook:
-      :tax_rate: 20.0
-      :tax_treatment: :default
-      :tax_scope: :na
+    -
+      :default:
+        :tax_rate: 20.0
+      :book:
+        :tax_rate: 0.0
+        :tax_treatment: :special
+        :tax_scope: :all
+      :ebook:
+        :tax_rate: 20.0
+        :tax_treatment: :default
+        :tax_scope: :na
+      :end_at: 2020-04-30
+    -
+      :default:
+        :tax_rate: 20.0
+      :book:
+        :tax_rate: 0.0
+        :tax_treatment: :special
+        :tax_scope: :all
+      :ebook:
+        :tax_rate: 0.0
+        :tax_treatment: :default
+        :tax_scope: :na
   DZ:
     :default:
       :tax_rate: 17.0
