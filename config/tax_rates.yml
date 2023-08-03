@@ -10,6 +10,17 @@
       :tax_rate: 10.0
       :tax_treatment: :default
       :tax_scope: :na
+  CL:
+    :default:
+      :tax_rate: 19.0
+    :book:
+      :tax_rate: 19.0
+      :tax_treatment: :default
+      :tax_scope: :na
+    :ebook:
+      :tax_rate: 19.0
+      :tax_treatment: :default
+      :tax_scope: :na
   CN:
     :default:
       :tax_rate: 13.0
@@ -246,16 +257,29 @@
       :tax_treatment: :default
       :tax_scope: :na
   BG:
-    :default:
-      :tax_rate: 20.0
-    :book:
-      :tax_rate: 0.0
-      :tax_treatment: :exempt
-      :tax_scope: :limited
-    :ebook:
-      :tax_rate: 20.0
-      :tax_treatment: :default
-      :tax_scope: :na
+    -
+      :default:
+        :tax_rate: 20.0
+      :book:
+        :tax_rate: 0.0
+        :tax_treatment: :exempt
+        :tax_scope: :limited
+      :ebook:
+        :tax_rate: 20.0
+        :tax_treatment: :default
+        :tax_scope: :na
+      :end_at: 2020-06-30
+    -
+      :default:
+        :tax_rate: 20.0
+      :book:
+        :tax_rate: 0.0
+        :tax_treatment: :exempt
+        :tax_scope: :limited
+      :ebook:
+        :tax_rate: 10.0
+        :tax_treatment: :default
+        :tax_scope: :na
   HR:
     -
       :default:
@@ -364,16 +388,29 @@
       :tax_treatment: :default
       :tax_scope: :na
   EE:
-    :default:
-      :tax_rate: 20.0
-    :book:
-      :tax_rate: 9.0
-      :tax_treatment: :special
-      :tax_scope: :all
-    :ebook:
-      :tax_rate: 20.0
-      :tax_treatment: :default
-      :tax_scope: :na
+    -
+      :default:
+        :tax_rate: 20.0
+      :book:
+        :tax_rate: 9.0
+        :tax_treatment: :special
+        :tax_scope: :all
+      :ebook:
+        :tax_rate: 20.0
+        :tax_treatment: :default
+        :tax_scope: :na
+      :end_at: 2020-04-30
+    -
+      :default:
+        :tax_rate: 20.0
+      :book:
+        :tax_rate: 9.0
+        :tax_treatment: :special
+        :tax_scope: :all
+      :ebook:
+        :tax_rate: 10.0
+        :tax_treatment: :special
+        :tax_scope: :na
   FI:
     -
       :default:
@@ -397,6 +434,18 @@
       :ebook:
         :tax_rate: 24.0
         :tax_treatment: :default
+        :tax_scope: :na
+      :end_at: 2019-06-30
+    -
+      :default:
+        :tax_rate: 24.0
+      :book:
+        :tax_rate: 10.0
+        :tax_treatment: :special
+        :tax_scope: :all
+      :ebook:
+        :tax_rate: 10.0
+        :tax_treatment: :special
         :tax_scope: :na
   FR:
     -
@@ -481,16 +530,29 @@
         :tax_treatment: :special
         :tax_scope: :limited
   GR:
-    :default:
-      :tax_rate: 23.0
-    :book:
-      :tax_rate: 6.5
-      :tax_treatment: :special
-      :tax_scope: :limited
-    :ebook:
-      :tax_rate: 23.0
-      :tax_treatment: :default
-      :tax_scope: :na
+    -
+      :default:
+        :tax_rate: 23.0
+      :book:
+        :tax_rate: 6.5
+        :tax_treatment: :special
+        :tax_scope: :limited
+      :ebook:
+        :tax_rate: 23.0
+        :tax_treatment: :default
+        :tax_scope: :na
+      end_at: 2021-06-30
+    -
+      :default:
+        :tax_rate: 24.0
+      :book:
+        :tax_rate: 6.0
+        :tax_treatment: :special
+        :tax_scope: :limited
+      :ebook:
+        :tax_rate: 6.0
+        :tax_treatment: :special
+        :tax_scope: :na
   HU:
     -
       :default:
@@ -741,16 +803,29 @@
         :tax_treatment: :special
         :tax_scope: :limited
   "NO":
-    :default:
-      :tax_rate: 25.0
-    :book:
-      :tax_rate: 0.0
-      :tax_treatment: :special
-      :tax_scope: :all
-    :ebook:
-      :tax_rate: 25.0
-      :tax_treatment: :default
-      :tax_scope: :na
+    -
+      :default:
+        :tax_rate: 25.0
+      :book:
+        :tax_rate: 0.0
+        :tax_treatment: :special
+        :tax_scope: :all
+      :ebook:
+        :tax_rate: 25.0
+        :tax_treatment: :default
+        :tax_scope: :na
+      :end_at: 2019-06-30
+    -
+      :default:
+        :tax_rate: 25.0
+      :book:
+        :tax_rate: 0.0
+        :tax_treatment: :special
+        :tax_scope: :all
+      :ebook:
+        :tax_rate: 0.0
+        :tax_treatment: :special
+        :tax_scope: :na
   PL:
     -
       :default:
