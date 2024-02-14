@@ -376,6 +376,18 @@
         :tax_rate: 10.0
         :tax_treatment: :default
         :tax_scope: :na
+      :end_at: 2023-12-31
+    -
+      :default:
+        :tax_rate: 21.0
+      :book:
+        :tax_rate: 10.0
+        :tax_treatment: :special
+        :tax_scope: :all
+      :ebook:
+        :tax_rate: 0.0
+        :tax_treatment: :default
+        :tax_scope: :na
   DK:
     :default:
       :tax_rate: 25.0
@@ -622,6 +634,18 @@
         :tax_scope: :all
       :ebook:
         :tax_rate: 9.0
+        :tax_treatment: :special
+        :tax_scope: :limited
+      :end_at: 2023-12-31
+    -
+      :default:
+        :tax_rate: 23.0
+      :book:
+        :tax_rate: 0.0
+        :tax_treatment: :special
+        :tax_scope: :all
+      :ebook:
+        :tax_rate: 0.0
         :tax_treatment: :special
         :tax_scope: :limited
   IT:
@@ -1049,6 +1073,18 @@
         :tax_scope: :limited
       :ebook:
         :tax_rate: 2.5
+        :tax_treatment: :default
+        :tax_scope: :na
+      :end_at: 2023-12-31
+    -
+      :default:
+        :tax_rate: 8.0
+      :book:
+        :tax_rate: 2.5
+        :tax_treatment: :special
+        :tax_scope: :limited
+      :ebook:
+        :tax_rate: 2.6
         :tax_treatment: :default
         :tax_scope: :na
   LI:
