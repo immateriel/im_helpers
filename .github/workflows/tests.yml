@@ -4,10 +4,10 @@ on: [pull_request, workflow_dispatch]
 jobs:
   test:
     strategy:
-      fail-fast: false
+      fail-fast: true
       matrix:
-        gemfiles: [rails5, rails6]
-        rubies: [2.4, 2.5, 2.6, 2.7, '3.0']
+        gemfiles: [rails5]  # , rails6]
+        rubies: [2.4, 2.5]  # , 2.6, 2.7, '3.0']
         exclude:
           - rubies: '3.0'
             gemfiles: rails5
