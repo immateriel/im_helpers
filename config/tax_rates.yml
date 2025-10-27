@@ -459,7 +459,7 @@
         :tax_rate: 10.0
         :tax_treatment: :special
         :tax_scope: :na
-    :end_at: 2024-12-31
+      :end_at: 2024-12-31
     -
       :default:
         :tax_rate: 24.0
@@ -946,7 +946,7 @@
         :tax_rate: 19.0
         :tax_treatment: :default
         :tax_scope: :na
-    :end_at: 2025-07-31
+      :end_at: 2025-07-31
     -
       :default:
         :tax_rate: 19.0
@@ -981,28 +981,29 @@
       :tax_treatment: :special
       :tax_scope: :unknown
   SK:
-    :default:
-      :tax_rate: 20.0
-    :book:
-      :tax_rate: 10.0
-      :tax_treatment: :special
-      :tax_scope: :all
-    :ebook:
-      :tax_rate: 20.0
-      :tax_treatment: :default
-      :tax_scope: :na
-    :end_at: 2024-12-31
-  -
-    :default:
-      :tax_rate: 23.0
-    :book:
-      :tax_rate: 5.0
-      :tax_treatment: :special
-      :tax_scope: :all
-    :ebook:
-      :tax_rate: 5.0
-      :tax_treatment: :special
-      :tax_scope: :na
+    -
+      :default:
+        :tax_rate: 20.0
+      :book:
+        :tax_rate: 10.0
+        :tax_treatment: :special
+        :tax_scope: :all
+      :ebook:
+        :tax_rate: 20.0
+        :tax_treatment: :default
+        :tax_scope: :na
+      :end_at: 2024-12-31
+    -
+      :default:
+        :tax_rate: 23.0
+      :book:
+        :tax_rate: 5.0
+        :tax_treatment: :special
+        :tax_scope: :all
+      :ebook:
+        :tax_rate: 5.0
+        :tax_treatment: :special
+        :tax_scope: :na
   SI:
     -
       :default:
