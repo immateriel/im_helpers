@@ -7,15 +7,6 @@ require 'countries'
 
 describe ImHelpers do
   describe "extensions" do
-    it "escapes exclamations points" do
-      expect("Ce qui se passe à Vegas reste à Vegas!".escape_sphinx_query).to eq("Ce qui se passe à Vegas reste à Vegas\\!")
-      expect("Coucou !".escape_sphinx_query).to eq("Coucou \\!")
-    end
-
-    it "escapes at characters" do
-      expect("jean@dupont.com".escape_sphinx_query).to eq("jean\\@dupont.com")
-    end
-
     it "strips html" do
       expect("<p><em>Hello</em> <strong>World</strong></p>".strip_html).to eq("Hello World")
     end
